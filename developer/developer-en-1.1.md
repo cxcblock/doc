@@ -1,4 +1,4 @@
-# 1 CXCChain introduction
+# 1. CXCChain introduction
 
 CXC public blockchain is the founding body. In its system, whether you are a merchant, an individual or a developer, you can rely on multi-layer information marketing intelligent
 contract for fast fission as cells. DNA, that is CXC blockchain business
@@ -23,6 +23,7 @@ github:https://github.com/cxcblock
 ```json
 json { "method": "showinfo", "configs": [], "id": 1}
 ```
+
 > parameter description：
 
 ```
@@ -30,11 +31,13 @@ json { "method": "showinfo", "configs": [], "id": 1}
 	 configs:imported parameter by Method  Array type.
 	 id:Call identifier. It is used to mark a remote call procedure
 ```
+
 2.Block chain node receives the call request, processes the method call, and gives the result effect of method utility to the caller; returns the data format.
 
 ```json
 json {"result":	{"paytxfee":0,"relayfee":0.1,"rpcport":7318,"maxout":2000000},"error":null,"id":"1"}
 ```
+
 > parameter description：
 
 ```
@@ -42,6 +45,7 @@ json {"result":	{"paytxfee":0,"relayfee":0.1,"rpcport":7318,"maxout":2000000},"e
 	error:Error in call, error-free return null。
 	id:Call identifier，which is consistent with the identifier imported by the caller.
 ```
+
 ## 2.2 Command execution mode
 
 RPC username and password are stored in the file of /.cxcs/CXCChain/cxcs.conf（linux/MAC）or %APPDATA%\CXcs\CXCChain\cxcs.conf（Windows）, which can be connected by using the cxcsi command tool or the CLI interface built into the CXCChain GUI tool (PC side wallet). These tools will automatically read the RPC username and password and connect to the running blockchain. Please do not open the rpc port to the external network.
@@ -51,6 +55,7 @@ RPC username and password are stored in the file of /.cxcs/CXCChain/cxcs.conf（
 ```bash
   [command] [configs]
 ```
+
 ## 2.3 Available API instruction
 
 ### 2.3.1query and control of blockchain
@@ -58,6 +63,7 @@ RPC username and password are stored in the file of /.cxcs/CXCChain/cxcs.conf（
 **The way to command  cxcsi CXCChain (command),For example cxcsi CXCChain help.
 
 #### help
+
 > description
 
 Return to the list of available commands
@@ -67,6 +73,7 @@ Return to the list of available commands
 ```bash
   help (command)
 ```
+
 > parameter
 
 | parameter | description                  |
@@ -84,6 +91,7 @@ Return to the list of available commands
 If there is no parameter to display the command list；if there is a parameter to display how to use this command
 
 #### stop
+
 > description
 
 Stop blockchain operation
@@ -93,6 +101,7 @@ Stop blockchain operation
 ```bash
   stop
 ```
+
 > parameter
 
 no
@@ -102,6 +111,7 @@ no
 CXcs server stopping
 
 #### pause
+
 > description
 
 Pause blockchain
@@ -111,6 +121,7 @@ Pause blockchain
 ```bash
   pause (task(s))
 ```
+
 > parameter
 
 | parameter | description                                                  |
@@ -128,6 +139,7 @@ Pause blockchain
 Null
 
 #### resume
+
 > description
 
 Restore the blockchain and use it with pause
@@ -137,6 +149,7 @@ Restore the blockchain and use it with pause
 ```bash
   resume (task(s))
 ```
+
 > parameter
 
 | parameter | description                                                  |
@@ -152,7 +165,9 @@ Restore the blockchain and use it with pause
 > result
 
 Null
+
 #### showmem
+
 > description
 
 Return memory pool information 
@@ -162,6 +177,7 @@ Return memory pool information
 ```bash
   showmem
 ```
+
 > parameter
 
 null
@@ -174,7 +190,9 @@ null
 		"bytes" : 0
 	 }
 ```
+
 #### addnode
+
 > description
 
 Manually add or remove point-to-point link
@@ -184,19 +202,23 @@ Manually add or remove point-to-point link
 ```bash
   addnode "node" "add"|"remove"|"onetry"	
 ```
+
 > parameter
 
-| parameter | description |
-| --------- | ----------- |
-| node      | node        |
-|command	|add add the node to a connection set; remove remove the node out of the set;onetry Try connecting node test|
+| parameter | description                                                  |
+| --------- | ------------------------------------------------------------ |
+| node      | node                                                         |
+| command   | add add the node to a connection set; remove remove the node out of the set;onetry Try connecting node test |
 
->  e.g.
+> e.g.
 
 ```bash
   addnode "ip:port" "add"
+
 ```
+
 #### shownode
+
 > description
 
 Query connection node
@@ -205,19 +227,21 @@ Query connection node
 
 ```bash
   shownode  ( "node" )
+
 ```
+
 > parameter 
 
 | parameter           | description                                                  |
 | ------------------- | ------------------------------------------------------------ |
 | (boolean)true/false | true= Return information about adding nodes using addnode，false= Return the list of nodes added using addnode |
-|node	| the node that contains or omits ip(:port)	|
+| node                | the node that contains or omits ip(:port)                    |
 
-> 
 > e.g.
 
 ```bash
   shownode true shownode true "ip"
+
 ```
 
 > result
@@ -236,8 +260,11 @@ Query connection node
 				]
 		}
 	 ]
+
 ```
+
 #### shownet
+
 > description
 
 Return the connected network IP and port information
@@ -246,11 +273,12 @@ Return the connected network IP and port information
 
 ```bash
   shownet
+
 ```
+
 > parameter
 
 null
-
 
 > result
 
@@ -281,8 +309,11 @@ null
   ,...
   ]
  }
+
 ```
+
 #### showpeer
+
 > description
 
 Return information about other connected nodes
@@ -291,7 +322,9 @@ Return information about other connected nodes
 
 ```bash
   showpeer
+
 ```
+
 > parameter
 
 null
@@ -328,8 +361,11 @@ null
 	  }
 	  ,...
 	 ]
+
 ```
+
 #### showchain
+
 > description
 
 Show chain information
@@ -338,7 +374,9 @@ Show chain information
 
 ```bash
   showchain
+
 ```
+
 > parameter
 
 null
@@ -351,8 +389,11 @@ null
 		"headers" : 2016,
 		"bestblockhash" : "000061d0db856cf824e6e20e0eeb4005ac968a145b0aa142619a0127d073bdc2"
 	}
+
 ```
+
 #### showblock
+
 > description
 
 View the block information of the specified hash|height
@@ -361,18 +402,21 @@ View the block information of the specified hash|height
 
 ```bash
   showblock "hash"|height ( type )
+
 ```
+
 > parameter
 
-| parameter   | description                |
-| ----------- | -------------------------- |
-| hash/height | Block hash or block height |
-|type	|0- encoded data, 1- json object, 2- with tx encoded data, 4- with tx json object	|
+| parameter   | description                                                  |
+| ----------- | ------------------------------------------------------------ |
+| hash/height | Block hash or block height                                   |
+| type        | 0- encoded data, 1- json object, 2- with tx encoded data, 4- with tx json object |
 
 > e.g.
 
 ```bash
   showblock "105"
+
 ```
 
 > result
@@ -401,8 +445,11 @@ View the block information of the specified hash|height
 
 	Outputs (for type=0):
 	  (string)  "data"                       A hex-encoded data string for block 'hash'.
+
 ```
+
 #### showblocks
+
 > description
 
 Return information about the specified block
@@ -411,27 +458,33 @@ Return information about the specified block
 
 ```bash
   showblocks block-set-identifier ( false|true )
+
 ```
+
 > parameter
 
 | parameter            | description                                                  |
 | -------------------- | ------------------------------------------------------------ |
 | block-set-identifier | Block height or block hash / Height set or time range {"starttime" : start-time Start time."endtime" : end-time End time.} |
-|false/true	| the default is false. If true, the more detailed information will be shown.	|
+| false/true           | the default is false. If true, the more detailed information will be shown. |
 
 e.g.
 
 ```bash
   showblocks "hash1,hash2"
 	showblocks "hash"
+
 ```
 
 > result
 
 ```bash
   Block information set
+
 ```
+
 #### showblockhash
+
 > description
 
 Return the HASH value of the specified height block
@@ -440,7 +493,9 @@ Return the HASH value of the specified height block
 
 ```bash
   showblockhash index
+
 ```
+
 > parameter 
 
 | parameter | description  |
@@ -451,14 +506,99 @@ e.g.
 
 ```bash
   showblockhash 20
+
 ```
 
 > result
 
 ```bash
   Block hash value
+
 ```
+
+#### showdeal
+
+> description
+
+Returns the specified wallet transaction details. This command can only query related transactions at the address of this node.
+
+> command
+
+```bash
+	showdeal txid
+
+```
+
+> parameter 
+
+| parameter | description |
+| --------- | ----------- |
+| txid      | txid        |
+
+> e.g.
+
+```bash
+	showdeal  "txid"
+
+```
+
+> result
+
+```bash
+{
+    "amount" : "0.00",
+    "fee" : "0.000069",
+    "confirmations" : 10370,
+    "blockhash" : "007191ede930cfxxxxxxxxxxxxxxxxxxxxxxxxxxxfd6a55d2d1802a78f4f51b2",
+    "blockindex" : 4,
+    "blocktime" : 1562300531,
+    "txid" : "c71a6a6de7b4312ba9cd6e1e575861122491e6c17d9b74e6920989cab8c4404f",
+    "walletconflicts" : [
+    ],
+    "valid" : true,
+    "time" : 1562300524,
+    "timereceived" : 1562300524,
+    "details" : [
+        {
+            "account" : "",
+            "address" : "13r6xxxxxxxxxxxxxxxxxxxxxxxxxx6p3snv2",
+            "category" : "send",
+            "amount" : "4.00",
+            "vout" : 0,
+            "fee" : "0.000069"
+        },
+        {
+            "account" : "",
+            "address" : "1JeZz3KS9xxxxxxxxxxxxxxxxxxxx68Syr3diH",
+            "category" : "send",
+            "amount" : "0.019771",
+            "vout" : 1,
+            "fee" : "0.000069"
+        },
+        {
+            "account" : "",
+            "address" : "13r6azRyVEXxxxxxxxxxxxxxxxxfM6p3snv2",
+            "category" : "receive",
+            "amount" : "4.00",
+            "vout" : 0
+        },
+        {
+            "account" : "",
+            "address" : "1JeZz3KS9MAMYxxxxxxxxxxCEr68Syr3diH",
+            "category" : "receive",
+            "amount" : "0.019771",
+            "vout" : 1
+        }
+    ],
+    "hex" : "0100000004c154d448e92dc607xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1f394bf385e213d3b1b56e07b73669336680454d88ac3b4d0000000000001976a914c1950fe62cc53640f6d449572a51ddc17b9e6ff988ac00000000"
+}	
+
+```
+
+####  
+
 #### signmessage
+
 > description
 
 Sign for messages based on private keys
@@ -467,26 +607,32 @@ Sign for messages based on private keys
 
 ```bash
   signmessage "address|privkey" "message"
+
 ```
+
 > parameter
 
 | parameter       | description                                                  |
 | --------------- | ------------------------------------------------------------ |
 | address/privkey | Address or private key, if it is an address, ensure that the private key of the address is also on the node. |
-|message	| Message to be signed	|
+| message         | Message to be signed                                         |
 
 e.g.
 
 ```bash
   signmessage "addr" "my message"
+
 ```
 
 > result
 
 ```bash
   the string after signing
+
 ```
+
 #### checkmessage
+
 > description
 
 verification message
@@ -495,23 +641,28 @@ verification message
 
 ```bash
   checkmessage "publickey" "signature" "message"
+
 ```
+
 > parameter
 
-| parameter | description |
-| --------- | ----------- |
-| publickey | Public key  |
-|signature	| the string after signing	|
-|message | Message before signing	|
-
+| parameter | description              |
+| --------- | ------------------------ |
+| publickey | Public key               |
+| signature | the string after signing |
+| message   | Message before signing   |
 
 > result
 
 ```bash
   true|false
+
 ```
+
 ### 4.3.2 Manage wallet address key
+
 #### addnewaddr
+
 > description
 
 Create a new address
@@ -520,7 +671,9 @@ Create a new address
 
 ```bash
   addnewaddr
+
 ```
+
 > parameter
 
 null
@@ -529,8 +682,11 @@ null
 
 ```bash
   the created new address
+
 ```
+
 #### addmultiaddr
+
 > description
 
 create the address for multiple signatures and add it to the node
@@ -539,26 +695,32 @@ create the address for multiple signatures and add it to the node
 
 ```bash
   addmultiaddr nrequired keys
+
 ```
+
 > parameter
 
 | parameter | description                                            |
 | --------- | ------------------------------------------------------ |
 | nrequired | the number of signature addresses required for signing |
-|keys	| Public key set	|
+| keys      | Public key set                                         |
 
 > e.g.
 
 ```bash
   addmultiaddr 2 "[\"HEXPUBKEYS\",\"HEXPUBKEYS\"]"
+
 ```
 
 > result
 
 ```bash
   Multi-sign address
+
 ```
+
 #### setupmulti
+
 > description
 
 Create the multi-sign address but not add to the wallet, it is not recommended to use
@@ -567,18 +729,21 @@ Create the multi-sign address but not add to the wallet, it is not recommended t
 
 ```bash
   setupmulti nrequired keys
+
 ```
+
 > parameter
 
 | parameter | description                                            |
 | --------- | ------------------------------------------------------ |
 | nrequired | The number of signature addresses required for signing |
-|keys	|Public key set	|
+| keys      | Public key set                                         |
 
 > e.g.
 
 ```bash
   setupmulti 2 "[\"HEX-PUBKEYS\",\"HEX-PUBKEYS\"]"
+
 ```
 
 > result
@@ -588,8 +753,11 @@ Create the multi-sign address but not add to the wallet, it is not recommended t
 	  "address":"multisigaddress",          The value of the new multisig address.
 	  "redeemScript":"script"               The string value of the hex-encoded redemption script.
 	}
+
 ```
+
 #### setupkeypairs
+
 > description
 
 Generate one or more public/private key pairs，the default is 1
@@ -598,18 +766,20 @@ Generate one or more public/private key pairs，the default is 1
 
 ```bash
   setupkeypairs ( count )
+
 ```
+
 > parameter
 
 | parameter | description                                                  |
 | --------- | ------------------------------------------------------------ |
 | count     | the number of public/private key pairs created，the default is 1 |
 
-
 > e.g.
 
 ```bash
   setupkeypairs 10
+
 ```
 
 > result
@@ -622,8 +792,11 @@ Generate one or more public/private key pairs，the default is 1
 		  "privkey" : "private key",        Private key
 	  }
 	]
+
 ```
+
 #### showaddrs
+
 > description
 
 Return the detailed information of address in this node wallet
@@ -632,7 +805,9 @@ Return the detailed information of address in this node wallet
 
 ```bash
   showaddrs ( addr(es) count start )
+
 ```
+
 > parameter 
 
 | method   | parameter                                                    |
@@ -641,21 +816,24 @@ Return the detailed information of address in this node wallet
 | count    | Show the number of addresses, the default is INT_MAX         |
 | start    | Start from which article , the default is -count             |
 
-
 > e.g.
 
 ```bash
   showaddrs
 	showaddrs "*"
 	showaddrs "ADDR"
+
 ```
 
 > result
 
 ```bash
   Array of address objects
+
 ```
+
 #### dumpprivkey
+
 > description
 
 Export private key
@@ -664,7 +842,9 @@ Export private key
 
 ```bash
   dumpprivkey "address"
+
 ```
+
 > parameter
 
 | parameter | description                                   |
@@ -673,13 +853,15 @@ Export private key
 
  
 
-
 > result
 
 ```bash
   Private key
+
 ```
+
 #### importprivkey
+
 > description
 
 Import private key
@@ -688,7 +870,9 @@ Import private key
 
 ```bash
   importprivkey privkey(s)
+
 ```
+
 > parameter
 
 | parameter  | description                                                  |
@@ -700,14 +884,18 @@ Import private key
 
 ```bash
   importprivkey "PRIKEY"
+
 ```
 
 > result
 
 ```bash
   No
+
 ```
+
 #### importaddr
+
 > description
 
 Add address to the wallet (without private key), create one or more accounts for read-only
@@ -716,7 +904,9 @@ Add address to the wallet (without private key), create one or more accounts for
 
 ```bash
   importaddr address(es)
+
 ```
+
 > parameter
 
 | parameter   | description                                                  |
@@ -724,19 +914,22 @@ Add address to the wallet (without private key), create one or more accounts for
 | address(es) | Required, single address or address array                    |
 | rescan      | Whether to rescan the transaction of the wallet, the default is true |
 
-
 > e.g.
 
 ```bash
   importaddr "ADDR"
+
 ```
 
 > result
 
 ```bash
   No
+
 ```
+
 #### backupwallet
+
 > description
 
 Backup wallet.dat Wallet file
@@ -745,26 +938,31 @@ Backup wallet.dat Wallet file
 
 ```bash
   backupwallet "destination"
+
 ```
+
 > parameter
 
 | parameter   | description |
 | ----------- | ----------- |
 | destination | file path   |
 
-
 > e.g.
 
 ```bash
   backupwallet "backup.dat"
+
 ```
 
 > result
 
 ```bash
   No
+
 ```
+
 #### dumpwallet
+
 > description
 
 Dump all private keys in the wallet to text file
@@ -773,26 +971,31 @@ Dump all private keys in the wallet to text file
 
 ```bash
   dumpwallet "filename"
+
 ```
+
 > parameter
 
 | parameter | description            |
 | --------- | ---------------------- |
 | filename  | File path to export to |
 
-
 > e.g.
 
 ```bash
   dumpwallet "test"
+
 ```
 
 > result
 
 ```bash
   No
+
 ```
+
 #### encryptwallet
+
 > description
 
 the wallet for the encrypted node for the first time, use password as the unlock password Please note that after encryption, you cannot restore to non-password state, unless you delete all files of the node and resynchronize the block！
@@ -801,27 +1004,31 @@ the wallet for the encrypted node for the first time, use password as the unlock
 
 ```bash
   encryptwallet "password"
+
 ```
+
 > parameter
 
 | parameter | description |
 | --------- | ----------- |
 | password  | password    |
 
-
 > e.g.
 
 ```bash
   encryptwallet "password"
+
 ```
 
 > result
 
 ```bash
   No
+
 ```
-Note that once the node is encrypted, whether it is to restart the node or change the password, you need to call the resume incoming, mining command.
+
 #### changepass
+
 > description
 
 Change wallet password
@@ -830,7 +1037,9 @@ Change wallet password
 
 ```bash
   changepass password newpassword
+
 ```
+
 > parameter
 
 | parameter   | description  |
@@ -838,13 +1047,15 @@ Change wallet password
 | password    | old password |
 | newpassword | new password |
 
-
 > result
 
 ```bash
   No
+
 ```
+
 #### walletpass
+
 > description
 
 use password to unlock the node wallet, which is valid for the time.
@@ -853,7 +1064,9 @@ use password to unlock the node wallet, which is valid for the time.
 
 ```bash
   walletpass password time
+
 ```
+
 > parameter
 
 | parameter | description                         |
@@ -861,19 +1074,24 @@ use password to unlock the node wallet, which is valid for the time.
 | password  | password                            |
 | time      | Unlock time with the unit of second |
 
-
 > e.g.
 
 ```bash
   walletpass password 60
+
 ```
 
 > result
 
 ```bash
   true|false
+
 ```
+
+Note that once the node is encrypted, whether it is to restart the node or change the password, you need to call the resume incoming,mining command.
+
 #### showassets
+
 > description
 
 Return information about the assets that have been issued in the chain
@@ -882,7 +1100,9 @@ Return information about the assets that have been issued in the chain
 
 ```bash
   showassets ( asset-id(s) detail count start )
+
 ```
+
 > parameter
 
 | parameter   | description                                                  |
@@ -892,20 +1112,23 @@ Return information about the assets that have been issued in the chain
 | count       | Display the quantity, the default is INT_MAX                 |
 | start       | the default is -count                                        |
 
-
 > e.g.
 
 ```bash
   showassets
 	showassets "AAA"
+
 ```
 
 > result
 
 ```bash
   an assets set
+
 ```
+
 #### showaddrbals
+
 > description
 
 return to the list of all asset balances in the wallet of this account node
@@ -914,7 +1137,9 @@ return to the list of all asset balances in the wallet of this account node
 
 ```bash
   showaddrbals "address" ( minconf false|true )
+
 ```
+
 > parameter
 
 | method     | description                                                  |
@@ -923,20 +1148,23 @@ return to the list of all asset balances in the wallet of this account node
 | minconf    | minimum block confirmation value                             |
 | false/true | false by default. If it is true, read only accounts are contained |
 
-
 > e.g.
 
 ```bash
   showaddrbals "ADDR"
 	showaddrbals "ADDR" 0 true
+
 ```
 
 > result
 
 ```bash
   balance of each address
+
 ```
+
 #### showallbals
+
 > description
 
 return to the list of all asset balances in the wallet of this account node designated by the address(including the underlying currency)
@@ -945,7 +1173,9 @@ return to the list of all asset balances in the wallet of this account node desi
 
 ```bash
   showallbals ( address(es) assets minconf false|true false|true )
+
 ```
+
 > parameter
 
 | parameter   | description                                                  |
@@ -955,13 +1185,13 @@ return to the list of all asset balances in the wallet of this account node desi
 | minconf     | minimum block confirmation value                             |
 | false/true  | false by default. If it is true, read only accounts are contained |
 
-
 > e.g.
 
 ```bash
   showallbals
 	showallbals "address"
 	showallbals "address" "AAA"
+
 ```
 
 > result
@@ -985,8 +1215,11 @@ return to the list of all asset balances in the wallet of this account node desi
         }
     ]
 }
+
 ```
+
 #### showaddrdeal
+
 > description
 
 return to the transaction records of this account address
@@ -995,7 +1228,9 @@ return to the transaction records of this account address
 
 ```bash
   showaddrdeal "address" "txid"
+
 ```
+
 > parameter
 
 | parameter | description |
@@ -1003,11 +1238,11 @@ return to the transaction records of this account address
 | address   | address     |
 | txid      | The TXID    |
 
-
 > e.g.
 
 ```bash
   showaddrdeal "address" "txid"
+
 ```
 
 > result
@@ -1039,8 +1274,11 @@ return to the transaction records of this account address
 ]
 		
 	
+
 ```
+
 #### showaddrdeals
+
 > description
 
 return to the transaction information of this account address
@@ -1049,7 +1287,9 @@ return to the transaction information of this account address
 
 ```bash
   showaddrdeals "address" ( count skip false|true )
+
 ```
+
 > parameter
 
 | parameter  | description                                              |
@@ -1059,12 +1299,12 @@ return to the transaction information of this account address
 | skip       | 0 by default. Record the subscript of the start of query |
 | false/true | false by default. If it is true, show more detail item   |
 
-
 > e.g.
 
 ```bash
   showaddrdeals "ADDR"
 	showaddrdeals "ADDR" 20 100
+
 ```
 
 > result
@@ -1094,8 +1334,11 @@ return to the transaction information of this account address
 	(string) "hex" : "data"                     If true. Raw data for deals
 	  }
 	]
+
 ```
+
 #### showwalletdeal
+
 > description
 
 rovides information about transactions of the wallet of the node txid
@@ -1104,7 +1347,9 @@ rovides information about transactions of the wallet of the node txid
 
 ```bash
   showwalletdeal "txid" ( false|true false|true )
+
 ```
+
 > parameter
 
 | parameter  | description                                                  |
@@ -1112,12 +1357,12 @@ rovides information about transactions of the wallet of the node txid
 | txid       | txid                                                         |
 | false/true | false by default. If it is true, only read accounts are contained |
 
-
 > e.g.
 
 ```bash
   showwalletdeal "TXID"
 	showwalletdeal "TXID" true
+
 ```
 
 > result
@@ -1147,8 +1392,11 @@ rovides information about transactions of the wallet of the node txid
 		"hex" : "data"                    If true. Raw data for deal
 	  }
 	]
+
 ```
+
 #### showwalletdeals
+
 > description
 
 query about transactions of related wallet
@@ -1157,7 +1405,9 @@ query about transactions of related wallet
 
 ```bash
   showwalletdeals ( count skip false|true)
+
 ```
+
 > parameter
 
 | parameter  | description                                                  |
@@ -1166,12 +1416,12 @@ query about transactions of related wallet
 | skip       | subscript of start, 0 by default                             |
 | false/true | false by default. If it is true, read only accounts are contained |
 
-
 > e.g.
 
 ```bash
   showwalletdeals
 	showwalletdeals 20 100 true
+
 ```
 
 > result
@@ -1201,8 +1451,11 @@ query about transactions of related wallet
 		"hex" : "data"                    Raw data for deal
 	  }
 	]
+
 ```
+
 #### showassetdeal
+
 > description
 
 query transaction details based on asset id and txid
@@ -1211,7 +1464,9 @@ query transaction details based on asset id and txid
 
 ```bash
   showassetdeal "asset-id" "txid" ( false|true )
+
 ```
+
 > parameter
 
 | parameter  | description                                           |
@@ -1220,12 +1475,12 @@ query transaction details based on asset id and txid
 | txid       | txid                                                  |
 | false/true | false by default. If it is true,show more detail item |
 
-
 > e.g.
 
 ```bash
   showassetdeal "myasset" "mytxid"
 	showassetdeal "myasset" "mytxid"  true
+
 ```
 
 > result
@@ -1234,8 +1489,11 @@ query transaction details based on asset id and txid
   transaction details
 	
 	"deal"                              Info about an individual deal from the perspective of a particular asset.
+
 ```
+
 #### showassetdeals
+
 > description
 
 query the transaction information of a specific asset
@@ -1244,7 +1502,9 @@ query the transaction information of a specific asset
 
 ```bash
   showassetdeals "asset-id" ( count start local-ordering )
+
 ```
+
 > parameter
 
 | parameter      | description                                                  |
@@ -1254,20 +1514,23 @@ query the transaction information of a specific asset
 | start          | starting count,-count by default                             |
 | local-ordering | false by default.false indicates query from wallet and true indicates query from chain |
 
-
 > e.g.
 
 ```bash
   showassetdeals "test-asset"
 	showassetdeals "test-asset"  10 100 true
+
 ```
 
 > result
 
 ```bash
   List of deals
+
 ```
+
 #### send
+
 > description
 
 send one or more assets
@@ -1276,7 +1539,9 @@ send one or more assets
 
 ```bash
   send "address" object ( "comment" "comment-to" )
+
 ```
+
 > parameter
 
 | parameter  | description                                                  |
@@ -1286,19 +1551,22 @@ send one or more assets
 | comment    | additional information, not on block chain                   |
 | comment-to | attribution of additional information, not on the block chain |
 
-
 > e.g.
 
 ```bash
   send "ADDRTO" "{\"assetname\":1000,\"\":2000}"
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### sendfrom
+
 > description
 
 transfer to designated address
@@ -1307,7 +1575,9 @@ transfer to designated address
 
 ```bash
   sendfrom "from-address" "to-address" quantities-object ( "comment" "comment-to" )
+
 ```
+
 > parameter
 
 | parameter         | description                                                  |
@@ -1318,20 +1588,23 @@ transfer to designated address
 | comment           | additional information, not on block chain                   |
 | comment-to        | attribution of additional information, not on the block chain |
 
-
 > e.g.
 
 ```bash
   sendfrom "ADDRFROM" "ADDRTO" "{\"assetname\":1000,\"\":2000}"
 	sendfrom "ADDRFROM" "ADDRTO" 0.1 "desc" "desc out"
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### sendasset
+
 > description
 
 send a certain amount of assets to a specified address
@@ -1340,7 +1613,9 @@ send a certain amount of assets to a specified address
 
 ```bash
   sendasset "address" "asset-id" count ( native-amount "comment" "comment-to" )
+
 ```
+
 > parameter
 
 | parameter     | description                                                  |
@@ -1352,20 +1627,23 @@ send a certain amount of assets to a specified address
 | comment       | additional information, not on block chain                   |
 | comment-to    | attribution of additional information, not on the block chain |
 
-
 > e.g.
 
 ```bash
   sendasset "ADDRTO" assetname 1000
 	sendasset "ADDRTO" assetname 1000 0.1 "desc" "desc out"
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### sendassetfrom
+
 > description
 
 transfer to a desiganted account
@@ -1374,7 +1652,9 @@ transfer to a desiganted account
 
 ```bash
   sendassetfrom "from-address" "to-address" "asset-id" asset-count ( native-amount "comment" "comment-to" )
+
 ```
+
 > parameter
 
 | parameter     | description                                                  |
@@ -1387,20 +1667,23 @@ transfer to a desiganted account
 | comment       | additional information, not on block chain                   |
 | comment-to    | attribution of additional information, not on the block chain |
 
-
 > e.g.
 
 ```bash
   sendassetfrom "ADDRFROM" "ADDRTO" 0.1 assetname 1000
 	sendassetfrom "ADDRFROM" "ADDRTO" 0.1 assetname 1000 "desc" "desc out"
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### senddata
+
 > description
 
 similar send, additional information
@@ -1409,7 +1692,9 @@ similar send, additional information
 
 ```bash
   senddata "address" amount|asset-quantities data|send-new-item
+
 ```
+
 > parameter
 
 | parameter        | description                                                  |
@@ -1418,20 +1703,23 @@ similar send, additional information
 | asset-quantities | quantity of underlying assets or asset obj                   |
 | data             | data, including hex,text,json. View the data that can be transmitted through help with-data |
 
-
 > e.g.
 
 ```bash
   senddata "ADDR" "{\"11111-2222-5678\":1000,\"22222-3333-1234\":2000}" data-hex
 	senddata "ADDR" 0.1 data-hex
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### senddatafrom
+
 > description
 
 transfer to a desiganted account with data。
@@ -1440,7 +1728,9 @@ transfer to a desiganted account with data。
 
 ```bash
   senddatafrom "from-address" "to-address" amount|asset-qty data|send-new-item
+
 ```
+
 > parameter
 
 | parameter        | description                                                  |
@@ -1455,14 +1745,18 @@ transfer to a desiganted account with data。
 ```bash
   senddatafrom "ADDR" "ADDR" "{\"key\":100,\"key2\":200}" data-hex
 	senddatafrom "ADDR" "ADDR" 0.1 data-hex
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### validaddr
+
 > description
 
 verify whether the address is correct
@@ -1471,18 +1765,20 @@ verify whether the address is correct
 
 ```bash
   validaddr "address"|"pubkey"|"privkey"
+
 ```
+
 > parameter
 
 | parameter              | description                          |
 | ---------------------- | ------------------------------------ |
 | address/pubkey/privkey | address or public key or private key |
 
-
 > e.g.
 
 ```bash
   validaddr "ADDR"
+
 ```
 
 > result
@@ -1496,10 +1792,13 @@ verify whether the address is correct
 	  "pubkey" : "publickeyhex",        The hex value of the raw public key
 	  "iscompressed" : true|false,      If the address is compressed
 	}
+
 ```
+
 ### 4.3.3 create assets for issuance /ChainDB
 
 #### sell
+
 > description
 
 issue a certain amount of assets to the address
@@ -1508,7 +1807,9 @@ issue a certain amount of assets to the address
 
 ```bash
   sell "address" "asset-name"|asset-configs count ( unit native-amount extend-data )
+
 ```
+
 > parameter
 
 | parameter     | description                                                  |
@@ -1520,21 +1821,24 @@ issue a certain amount of assets to the address
 | native-amount | quantity of underlying assets                                |
 | extend-data   | additional information                                       |
 
-
 > e.g.
 
 ```bash
   sell "ADDR" "Asset1" 500
 	sell "ADDR" "Asset1" 500 0.01
 	sell "ADDR" '{"name":"asset1","open":true}' 500
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### sellfrom
+
 > description
 
 issue from specific address
@@ -1543,7 +1847,9 @@ issue from specific address
 
 ```bash
   sellfrom "from-address" "to-address" "asset-name"|asset-configs qty ( unit native-amount custom-fields )
+
 ```
+
 > parameter
 
 | parameter     | description                                                  |
@@ -1561,14 +1867,18 @@ issue from specific address
 ```bash
   sellfrom "ADDRFROM" "ADDRTO" "Asset1" true 1000
 	sellfrom "ADDRFROM" "ADDRTO" Asset1  1000 0.01 0.01
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### sellasset
+
 > description
 
 issue a certain amount of additional assets to the designated address.
@@ -1577,7 +1887,9 @@ issue a certain amount of additional assets to the designated address.
 
 ```bash
   sellasset "address" "asset-id" qty ( native-amount custom-fields )
+
 ```
+
 > parameter
 
 | parameter     | description                            |
@@ -1593,14 +1905,18 @@ issue a certain amount of additional assets to the designated address.
 ```bash
   sellasset "ADDR" "Asset1" 1000
 	sellasset "ADDR" Asset1 1000 0.01
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### sellassetfrom
+
 > description
 
 issue a certain amount of additional assets to the designated address from a specific address
@@ -1609,7 +1925,9 @@ issue a certain amount of additional assets to the designated address from a spe
 
 ```bash
   sellassetfrom "from-address" "to-address" "asset-id" qty ( native-amount custom-fields )
+
 ```
+
 > parameter
 
 | parameter     | description                            |
@@ -1626,14 +1944,18 @@ issue a certain amount of additional assets to the designated address from a spe
 ```bash
   sellassetfrom "Manage ADDR" "ADDRTO" "Asset1" 1000
 	sellassetfrom "manage address" "ADDRTO" Asset1 1000 0.01
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### setupdatamod
+
 > description
 
 create ChainDB. ChainDB is stored in the block chain in the form of key-value
@@ -1642,7 +1964,9 @@ create ChainDB. ChainDB is stored in the block chain in the form of key-value
 
 ```bash
   setupdatamod   "name" access  (extend-data )
+
 ```
+
 > parameter
 
 | parameter   | description                                     |
@@ -1651,20 +1975,23 @@ create ChainDB. ChainDB is stored in the block chain in the form of key-value
 | access      | true/false whether anyone is permitted to write |
 | extend-data | additional information                          |
 
-
 > e.g.
 
 ```bash
   setupdatamod datatest false
 	setupdatamod datatest false '{"desc":"Test Data"}'
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### setupdatamodfrom
+
 > description
 
 create with specific address ChainDB
@@ -1673,7 +2000,9 @@ create with specific address ChainDB
 
 ```bash
   setupdatamodfrom "from-address"   "name" access  (extend-data )
+
 ```
+
 > parameter
 
 | parameter    | description                                     |
@@ -1688,14 +2017,18 @@ create with specific address ChainDB
 ```bash
   setupdatamodfrom "ADDRFROM" dm1  false
 	setupdatamodfrom "ADDRFROM" dm2  false '{"desc":"info"}'
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### senditem
+
 > description
 
 write data in ChainDB
@@ -1704,7 +2037,9 @@ write data in ChainDB
 
 ```bash
   senditem "datamodId" "key"|keys "data-hex"|data-obj "options"
+
 ```
+
 > parameter
 
 | parameter | description                                                  |
@@ -1718,14 +2053,18 @@ write data in ChainDB
 
 ```bash
   senditem test "text" data
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### senditemfrom
+
 > description
 
 write in ChainDB according to specific address
@@ -1734,7 +2073,9 @@ write in ChainDB according to specific address
 
 ```bash
   senditemfrom "from-address" "datamodid" "key"|keys "data-hex"|data-obj "options"
+
 ```
+
 > parameter
 
 | parameter    | description                                                  |
@@ -1749,14 +2090,18 @@ write in ChainDB according to specific address
 
 ```bash
   senditemfrom "fromaddr" datamodname "key" hex
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### showdatas
+
 > description
 
 return to information about ChainDB created on the block chain
@@ -1765,7 +2110,9 @@ return to information about ChainDB created on the block chain
 
 ```bash
   showdatas ( DatamodId(s) false|true count start )
+
 ```
+
 > parameter
 
 | parameter    | description                                            |
@@ -1775,19 +2122,22 @@ return to information about ChainDB created on the block chain
 | count        | INT_MAX by default,current show                        |
 | start        | start,-count	by default                             |
 
-
 > e.g.
 
 ```bash
   showdatas
+
 ```
 
 > result
 
 ```bash
   ChainDB set
+
 ```
+
 #### order
+
 > description
 
 subscribe DB（content that can only be DB queried if subscribed）
@@ -1796,7 +2146,9 @@ subscribe DB（content that can only be DB queried if subscribed）
 
 ```bash
   order entity-id(s) ( rescan )
+
 ```
+
 > parameter
 
 | parameter    | description                                                  |
@@ -1804,19 +2156,22 @@ subscribe DB（content that can only be DB queried if subscribed）
 | entity-id(s) | DB id or DB name                                             |
 | rescan       | whether to re-scan the transactions in wallet. True by default |
 
-
 > e.g.
 
 ```bash
   order "test-datamod" false
+
 ```
 
 > result
 
 ```bash
   No
+
 ```
+
 #### noorder
+
 > description
 
 unsubscribe DB
@@ -1825,7 +2180,9 @@ unsubscribe DB
 
 ```bash
   noorder entity-id(s) ( purge )
+
 ```
+
 > parameter
 
 | parameter    | description                                                  |
@@ -1833,19 +2190,22 @@ unsubscribe DB
 | entity-id(s) | DB name or set                                               |
 | purge        | true or false false by default,clear all external link data stored in the data store |
 
-
 > e.g.
 
 ```bash
   noorder "datamod1"
+
 ```
 
 > result
 
 ```bash
   No
+
 ```
+
 #### showdataitem
+
 > description
 
 query Chain DB information
@@ -1854,7 +2214,9 @@ query Chain DB information
 
 ```bash
   showdataitem "datamod-id" "txid" ( detail )
+
 ```
+
 > parameter
 
 | parameter  | description                                      |
@@ -1863,20 +2225,23 @@ query Chain DB information
 | TXID       | TXID                                             |
 | detail     | false by default. If it is true,show detail item |
 
-
 > e.g.
 
 ```bash
   showdataitem "DATAMODID" "TXID"
 	showdataitem "DATAMODID" "TXID"  true
+
 ```
 
 > result
 
 ```bash
   Chain DB data information
+
 ```
+
 #### showdataitems
+
 > description
 
 query Chain DB set
@@ -1885,7 +2250,9 @@ query Chain DB set
 
 ```bash
   showdataitems "datamodId" ( count start false|true )
+
 ```
+
 > parameter
 
 | parameter  | description                                  |
@@ -1899,6 +2266,7 @@ query Chain DB set
 
 ```bash
   showdataitems "datamod1" 10 100
+
 ```
 
 > result
@@ -1906,14 +2274,18 @@ query Chain DB set
 ```basChainDB集合
 
 ```
+
 #### showdatakeys
+
 > description Keyword information of ChainDB
 
 > command
 
 ```bash
   showdatakeys "DatamodId" ( key(s) count start false|true )
+
 ```
+
 > parameter
 
 | parameter  | description                                                  |
@@ -1924,13 +2296,13 @@ query Chain DB set
 | start      | -count by default                                            |
 | false/true | false by default, true,data in the wallet,false,data in the block chain |
 
-
 > e.g.
 
 ```bash
   showdatakeys "datamod1"
 	showdatakeys "datamod1" "key01"
 	showdatakeys "datamod1" "*" 10 100
+
 ```
 
 > result
@@ -1945,8 +2317,11 @@ query Chain DB set
 			"confirmed":1
 		}
 	]
+
 ```
+
 #### showdatakeyitems
+
 > description
 
 according to key ChainDB
@@ -1955,7 +2330,9 @@ according to key ChainDB
 
 ```bash
   showdatakeyitems "datamodid" "key" (count start false|true )
+
 ```
+
 > parameter
 
 | parameter  | description                                                  |
@@ -1966,20 +2343,23 @@ according to key ChainDB
 | start      | number from back to front, -count by default                 |
 | false/true | if it is false,it is in the wallet; if it is true, it is in the block chain |
 
-
 > e.g.
 
 ```bash
   showdatakeyitems "datamod1" "key01"
 	showdatakeyitems "datamod1" "key01" 10 100
+
 ```
 
 > result
 
 ```basChainDB数据集合
   Datamod item list
+
 ```
+
 #### showdatasenderitems
+
 > description
 
 query according to the address of ChainDB
@@ -1988,7 +2368,9 @@ query according to the address of ChainDB
 
 ```bash
   showdatasenderitems "datamodID" "address" ( false|true count start false|true )
+
 ```
+
 > parameter
 
 | parameter  | description                                                  |
@@ -2004,6 +2386,7 @@ query according to the address of ChainDB
 ```bash
   	showdatasenderitems "datamod" "address"
 	showdatasenderitems "datamod" "address" true 10 100
+
 ```
 
 > result
@@ -2011,14 +2394,18 @@ query according to the address of ChainDB
 ```basChainDB数据集合
 
 ```
+
 #### showdatasenders
+
 > description write the information of the address in ChainDB
 
 > command
 
 ```bash
   showdatasenders "datamodid" ( address(es) false|true count start false|true )
+
 ```
+
 > parameter
 
 | parameter   | description                                                  |
@@ -2030,21 +2417,24 @@ query according to the address of ChainDB
 | start       | -count by default; number of count when starting query. If it is negative, query from back to front |
 | false/true  | false by default; false, query the wallet; true, query from the block chain |
 
-
 > e.g.
 
 ```bash
   showdatasenders "datamod1"
 	showdatasenders "datamod1" address
 	showdatasenders "datamod1" "*" true 10 100
+
 ```
 
 > result
 
 ```bash
   data list of the sender
+
 ```
+
 #### showtxoutdata
+
 > description
 
 query the additional information of specific transaction
@@ -2053,7 +2443,9 @@ query the additional information of specific transaction
 
 ```bash
   showtxoutdata "txid" vout ( count-bytes start-byte )
+
 ```
+
 > parameter
 
 | parameter   | description                                 |
@@ -2063,23 +2455,26 @@ query the additional information of specific transaction
 | count-bytes | INT_MAX by default, query number of bytes   |
 | start-byte  | 0 by default, number of bytes when starting |
 
-
 > e.g.
 
 ```bash
   showtxoutdata "TXID" 1
+
 ```
 
 > result
 
 ```bash
   additional information,including data of structures like hex,text,json
+
 ```
+
 ### atomic transaction
 
 realize commands involved in the atomic transactions on the block chain.
 
 #### prelock
+
 > description
 
 Lock the unspent output for atomic transactions.
@@ -2088,7 +2483,9 @@ Lock the unspent output for atomic transactions.
 
 ```bash
   prelock asset-qty ( true|false )
+
 ```
+
 > parameter
 
 | parameter  | description                                                  |
@@ -2096,12 +2493,12 @@ Lock the unspent output for atomic transactions.
 | asset-qty  | {"asset-id":qty}asset name: quantity                         |
 | true/false | The default is true. If it is true, the assets are locked. If it is false, the assets are not locked. |
 
-
 > e.g.
 
 ```bash
   prelock "{\"11111-2222-5678\":1000}"
 	prelock "{\"11111-2222-5678\":1000,\"22222-3333-1234\":2000}"
+
 ```
 
 > result
@@ -2111,8 +2508,11 @@ Lock the unspent output for atomic transactions.
 	  "txid": "TXID",                       TXID of the output which can be spent in setuprawex or setuprawex
 	  "vout": n                             VOUT index
 	}
+
 ```
+
 #### prelockfrom
+
 > description
 
 Specify the source address for asset locking.
@@ -2121,7 +2521,9 @@ Specify the source address for asset locking.
 
 ```bash
   	prelockfrom "from-address" asset-quantities ( lock )
+
 ```
+
 > parameter
 
 | parameter        | description                                                  |
@@ -2135,6 +2537,7 @@ Specify the source address for asset locking.
 ```bash
   prelockfrom "ADDR" "{\"11111-2222-5678\":1000}"
 	prelockfrom "ADDR" "{\"11111-2222-5678\":1000,\"22222-3333-1234\":2000}"
+
 ```
 
 > result
@@ -2144,8 +2547,11 @@ Specify the source address for asset locking.
 	  "txid": "TXID",                            TXID of the output which can be spent in setuprawex or setuprawex
 	  "vout": n                                  VOUT index
 	}
+
 ```
+
 #### setuprawex
+
 > description
 
 Create a new atomic exchange trade for a given number of assets based on TXID and VOUT generated by the prelock operation, and return to a HEX text block TX-HEX for the other party to trade.
@@ -2154,7 +2560,9 @@ Create a new atomic exchange trade for a given number of assets based on TXID an
 
 ```bash
   setuprawex "txid" vout ask-assets
+
 ```
+
 > parameter
 
 | parameter  | description                                    |
@@ -2163,19 +2571,22 @@ Create a new atomic exchange trade for a given number of assets based on TXID an
 | vout       | vout generated by prelock                      |
 | ask-assets | Ask for the quantity of assets to be exchanged |
 
-
 > e.g.
 
 ```bash
   setuprawex TXID 1 "{\"ASSETID2\":100}"
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### decoderawex
+
 > description
 
 Decode tx-hex created by setuprawex.
@@ -2184,7 +2595,9 @@ Decode tx-hex created by setuprawex.
 
 ```bash
   decoderawex "tx-hex" ( false|true )
+
 ```
+
 > parameter
 
 | parameter  | description                                                  |
@@ -2192,11 +2605,11 @@ Decode tx-hex created by setuprawex.
 | tx-hex     | hex to be parsed                                             |
 | false/true | The default is false. If it is true, more detailed information is shown |
 
-
 > e.g.
 
 ```bash
   decoderawex "HEX-STR"
+
 ```
 
 > result
@@ -2229,8 +2642,11 @@ Decode tx-hex created by setuprawex.
 		"cancomplete":true,
 		"complete":false
 	}
+
 ```
+
 #### addrawex
+
 > description
 
 Accept full offer/part of offer for atomic transaction
@@ -2239,7 +2655,9 @@ Accept full offer/part of offer for atomic transaction
 
 ```bash
   addrawex "hex" "txid" vout ask-assets
+
 ```
+
 > parameter
 
 | parameter  | description                                                |
@@ -2249,11 +2667,11 @@ Accept full offer/part of offer for atomic transaction
 | vout       | returned value of prelock                                  |
 | ask-assets | assets accepted and quantity                               |
 
-
 > e.g.
 
 ```bash
   addrawex "HEX-STR" TXID 1 "{\"1234-5678-9090\":200}"
+
 ```
 
 > result
@@ -2263,8 +2681,11 @@ Accept full offer/part of offer for atomic transaction
 	  "hex": "value",                    The raw deal with signature(s) (hex-encoded string)
 	  "complete": true|false             If exchange is completed and can be sent
 	}
+
 ```
+
 #### completerawex
+
 > description
 
 Complete a transaction for exchange. Additional service charges can be charged if necessary
@@ -2273,7 +2694,9 @@ Complete a transaction for exchange. Additional service charges can be charged i
 
 ```bash
   completerawex hex txid vout ask-assets ( data|send-new-item )
+
 ```
+
 > parameter
 
 | parameter          | description                  |
@@ -2284,19 +2707,22 @@ Complete a transaction for exchange. Additional service charges can be charged i
 | ask-assets         | assets received and quantity |
 | data/send-new-item | data carried                 |
 
-
 > e.g.
 
 ```bash
   completerawex "hexstring" txid 1 "{\"1234-5678-1234\":200}"
+
 ```
 
 > result
 
 ```bash
   hex
+
 ```
+
 #### sendrawdeal
+
 > description
 
 Verify atomic transaction and make broadcast transaction.
@@ -2305,7 +2731,9 @@ Verify atomic transaction and make broadcast transaction.
 
 ```bash
   sendrawdeal "tx-hex" ( allowhighfees )
+
 ```
+
 > parameter
 
 | parameter     | description                                              |
@@ -2313,19 +2741,22 @@ Verify atomic transaction and make broadcast transaction.
 | tx-hex        | tx-hex                                                   |
 | allowhighfees | The default is false. Is higher handling charge allowed? |
 
-
 > e.g.
 
 ```bash
   sendrawdeal "signedhex"
+
 ```
 
 > result
 
 ```bash
   txid
+
 ```
+
 #### disrawdeal
+
 > description
 
 Disable quotation TX-HEX for exchange
@@ -2334,20 +2765,24 @@ Disable quotation TX-HEX for exchange
 
 ```bash
   disrawdeal "tx-hex"
+
 ```
+
 > parameter
 
 | parameter | description |
 | --------- | ----------- |
 | tx-hex    | hex         |
 
-
 > result
 
 ```bash
   txid
+
 ```
+
 #### gatherunspent
+
 > description
 
 Collect unused output (UTXO) and combine it into an unused output. Return a list of TXID, which improve wallet performance
@@ -2356,7 +2791,9 @@ Collect unused output (UTXO) and combine it into an unused output. Return a list
 
 ```bash
   gatherunspent ( "address(es)" minconf maxcombines mininputs maxinputs maxtime )
+
 ```
+
 > parameter
 
 | parameter   | description                                                  |
@@ -2368,20 +2805,23 @@ Collect unused output (UTXO) and combine it into an unused output. Return a list
 | maxinputs   | The default is 100. Maximum input quantity                   |
 | maxtime     | The default is 15s. Maximum broadcast time                   |
 
-
 > e.g.
 
 ```bash
   gatherunspent "*" 1 15 2 10 100
 	gatherunspent "addr"
+
 ```
 
 > result
 
 ```bash
   	txids
+
 ```
+
 #### showlock
+
 > description
 
 Return to the list of unused transaction output lock in the wallet
@@ -2390,11 +2830,12 @@ Return to the list of unused transaction output lock in the wallet
 
 ```bash
   showlock
+
 ```
+
 > parameter
 
 Null
-
 
 > result
 
@@ -2406,8 +2847,11 @@ Null
 	  }
 	  ,...
 	]
+
 ```
+
 #### lock
+
 > description
 
 Lock or unlock output not spent
@@ -2416,7 +2860,9 @@ Lock or unlock output not spent
 
 ```bash
   lock unlock [{"txid":"txid","vout":n},...]
+
 ```
+
 > parameter
 
 | parameter | description                          |
@@ -2424,19 +2870,21 @@ Lock or unlock output not spent
 | unlock    | Lock false and unlock true           |
 | deals     | transaction to be locked or unlocked |
 
-
 > e.g.
 
 ```bash
   lock false "[{\"txid\":\"txid\",\"vout\":1}]"
 	lock true "[{\"txid\":\"txid\",\"vout\":1}]"
+
 ```
 
 > result
 
 ```bash
   true or false,Do you lock or unlock successfully
+
 ```
+
 #### setuprawdeal
 
 > description
@@ -2447,6 +2895,7 @@ Create a transaction that spends specified input and send it to the given addres
 
 ```bash
 	setuprawdeal [{"txid":"id","vout":n},...] {"address":amount,...} ( [data] "action" )
+
 ```
 
 > parameter
@@ -2466,6 +2915,7 @@ Create a transaction that spends specified input and send it to the given addres
 
 ```bash
 	setuprawdeal "[{\"txid\":\"myid\",\"vout\":0}]" "{\"address\":0.01}"
+
 ```
 
 > returned value
@@ -2478,7 +2928,43 @@ Create a transaction that spends specified input and send it to the given addres
 	  "hex": "value",                                        The raw deal with signature(s) (hex-encoded string)
 	  "complete": true|false                                 If deal has a complete set of signature (0 if not)
 	}
+
 ```
+
+#### showrawdeal
+
+> description
+
+Query transaction information。
+
+> command
+
+```bash
+	showrawdeal "txid" 
+
+```
+
+> parameter
+
+| parameter | description |
+| --------- | ----------- |
+| txid      | txid        |
+
+> e.g.
+
+```bash
+	showrawdeal "txid"
+
+```
+
+> returned value
+
+```bash
+	hex Complete hex information for the transaction
+
+```
+
+####  
 
 #### setuprawsendfrom
 
@@ -2490,6 +2976,7 @@ Creates a transaction by using the specified address
 
 ```bash
 	setuprawsendfrom "from-address" {"address":amount,...} ( [data] "action" )
+
 ```
 
 > parameter
@@ -2507,12 +2994,14 @@ Creates a transaction by using the specified address
 
 ```bash
 	setuprawsendfrom "FROMADDR" "{\"ADDR\":0.01}"
+
 ```
 
 > returned value
 
 ```bash
 	Same to setuprawdeal
+
 ```
 
 #### decoderawdeal
@@ -2525,6 +3014,7 @@ Decode TX-HEX of transaction
 
 ```bash
 	decoderawdeal "tx-hex"
+
 ```
 
 > parameter
@@ -2572,6 +3062,7 @@ Decode TX-HEX of transaction
 		 ,...
 	  ],
 	}
+
 ```
 
 #### addrawdeal
@@ -2584,6 +3075,7 @@ Similar to setuprawdeal. Instead of creating a new transaction, add the given in
 
 ```bash
 	addrawdeal "tx-hex" [{"txid":"id","vout":n},...] ( {"address":amount,...} [data] "action" )
+
 ```
 
 > parameter
@@ -2602,12 +3094,14 @@ Similar to setuprawdeal. Instead of creating a new transaction, add the given in
 
 ```bash
 	addrawdeal "hexstring" "[{\"txid\":\"myid\",\"vout\":0}]" "{\"address\":0.01}"
+
 ```
 
 > returned value
 
 ```bash
 	hex
+
 ```
 
 #### addrawchange
@@ -2620,6 +3114,7 @@ Accept the output of setuprawdeal. Specify the change address and service charge
 
 ```bash
 	addrawchange "tx-hex" "address" ( fee )
+
 ```
 
 > parameter
@@ -2637,12 +3132,14 @@ Accept the output of setuprawdeal. Specify the change address and service charge
 ```bash
 	addrawchange "HEX""ADDR"
 	addrawchange "HEX""ADDR" 0.01
+
 ```
 
 > returned value
 
 ```bash
 	hex
+
 ```
 
 #### addrawdata
@@ -2655,6 +3152,7 @@ Add a data for the original transaction output TX-HEX for setuprawdeal.
 
 ```bash
 	addrawdata tx-hex data
+
 ```
 
 > parameter
@@ -2670,12 +3168,14 @@ Add a data for the original transaction output TX-HEX for setuprawdeal.
 
 ```bash
 	addrawdata "TX-HEX" data-hex
+
 ```
 
 > returned value
 
 ```bash
 	hex
+
 ```
 
 #### signrawdeal
@@ -2688,6 +3188,7 @@ Sign the original transaction
 
 ```bash
 	signrawdeal "tx-hex" ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] ["privatekey1",...] sighashtype )
+
 ```
 
 > parameter
@@ -2705,6 +3206,7 @@ Sign the original transaction
 
 ```bash
 	signrawdeal "HEX-STR"
+
 ```
 
 > returned value
@@ -2714,6 +3216,7 @@ Sign the original transaction
 	  "hex": "value",                           The raw deal with signature(s) (hex-encoded string)
 	  "complete": true|false                    If deal has a complete set of signature (0 if not)
 	}
+
 ```
 
 # 5.Course sample
@@ -2731,6 +3234,7 @@ CXCChain uses UTXO model as the underlying stored data structure. Its full name 
 	addr2
 	addnewaddr
 	addr3
+
 ```
 
 ### 5.1.2 Send native assets
@@ -2740,6 +3244,7 @@ CXCChain uses UTXO model as the underlying stored data structure. Its full name 
 	txid1
 	sendfrom addr1 addr2
 	txid2
+
 ```
 
 ### 5.1.3 Send non-native assets
@@ -2749,6 +3254,7 @@ CXCChain uses UTXO model as the underlying stored data structure. Its full name 
 	txid1
 	sendfrom addr1 addr2 '{"BBB":10}'
 	txid2
+
 ```
 
 ### 5.1.4 Send many kinds of assets
@@ -2758,6 +3264,7 @@ CXCChain uses UTXO model as the underlying stored data structure. Its full name 
 	txid1
 	sendfrom addr1 addr2 '{"BBB":10,"AAA":20,"":10}'
 	txid2
+
 ```
 
 ## 5.2 Asset design and creation of asset samples
@@ -2769,6 +3276,7 @@ CXCChain uses UTXO model as the underlying stored data structure. Its full name 
 
 ```bash
 	sellfrom addr1 addr2 '{"name":"AAA","open":true}' 10000 0.01 
+
 ```
 
 - Check situation of assets
@@ -2794,6 +3302,7 @@ CXCChain uses UTXO model as the underlying stored data structure. Its full name 
           "ordered" : false
       }
   ]
+
 ```
 
 ### 5.2.2 Issue additional assets
@@ -2802,6 +3311,7 @@ Issue additional 12,000 AAA to addr2
 
 ```bash
 	sellassetfrom addr1 addr2 AAA 12000 0.01
+
 ```
 
 ## 5.3 Atomic exchange design and creation of asset samples
@@ -2818,12 +3328,14 @@ Any CXC transaction can have multiple inputs and outputs, and each transaction c
 
 ```bash
 	sellfrom addr1 addr1 '{"name":"AAA","open":true}' 22000 0.01
+
 ```
 
 - Execute Node 2, find an address where assets can be created (addr2), and create an asset to issue to addr2
 
 ```bash
 	sellfrom addr2 addr2 BBB 5000 0.01
+
 ```
 
 2..Make point-to-point atomic switching, execute a simple atomic switching, and switch Node 1 1000 AAA with Node 2 500 BBB.
@@ -2837,6 +3349,7 @@ Any CXC transaction can have multiple inputs and outputs, and each transaction c
       "txid" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
       "vout" : 0
 	}
+
 ```
 
 Get txid and vout
@@ -2847,6 +3360,7 @@ Get txid and vout
 	setuprawex b6bb4dbdf088a0d1cdcb6db451c1bd9de80b59e449488301627f5c706ce3bf11 0 '{"AAA":1000}'
 	
 	HEX1
+
 ```
 
 Output a hexadecimal block of text containing the original transaction data representing the exchange offer. Text block is denoted as HEX1
@@ -2881,6 +3395,7 @@ Output a hexadecimal block of text containing the original transaction data repr
       "cancomplete" : true,
       "complete" : false
   }
+
 ```
 
 If cancomplete is true, it means that the transaction is convertible.
@@ -2893,6 +3408,7 @@ If cancomplete is true, it means that the transaction is convertible.
       "txid" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
       "vout" : 0
   }
+
 ```
 
 Get txid and vout
@@ -2906,6 +3422,7 @@ Get txid and vout
         "hex" : HEX2,
         "complete" : true
     }
+
 ```
 
 Output longer hexadecimal text and denote as HEX2. complete:true. That means that the transaction is fully signed and ready for broadcast and confirmation.
@@ -2914,6 +3431,7 @@ Output longer hexadecimal text and denote as HEX2. complete:true. That means tha
 
 ```bash
 	sendrawdeal HEX2
+
 ```
 
 Return to TXID, wait for the blocking, and inquire the balance to see whether the exchange is successful.
@@ -2924,6 +3442,7 @@ How to cancel the exchange before acceptance and broadcasting.
 
 ```bash
 	disrawdeal HEX1
+
 ```
 
 At that time, decode rawex toreturn an error, indicating that the exchange has been successfully canceled.
@@ -2941,12 +3460,14 @@ Public key encryption, also known as asymmetric cryptography, is a key technolog
 
 ```bash
 	addmultiaddr 2 '["A1-publickey", "A2-publickey"]'
+
 ```
 
 Get the multi-signature address MA1A2, and automatically start tracking. Node 2 can repeat the command of Node 1
 
 ```bash
 	addmultiaddr 2 '["A1-publickey", "A2-publickey"]'
+
 ```
 
 ### 5.4.3 Make transaction through multi-signature account
@@ -2961,6 +3482,7 @@ Send funds through a multi-signature account. Since this is a 2/2 co-managed con
       "hex" : "XXXXXXXXXXXXXXXXXXXXXXXX",
       "complete" : false
   }
+
 ```
 
 Respond to complete:false. The hexadecimal hex field is HEX1. The partial signature has been made.
@@ -2974,6 +3496,7 @@ Respond to complete:false. The hexadecimal hex field is HEX1. The partial signat
 		  "hex" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 		  "complete" : true
 	  }
+
 ```
 
 Respond tocomplete:true， The hexadecimal hex field is HEX2.This means that the transaction is signed and can be broadcast to the block chain.
@@ -2982,6 +3505,7 @@ Respond tocomplete:true， The hexadecimal hex field is HEX2.This means that the
 
 ```bash
 	sendrawdeal HEX2
+
 ```
 
 ## 5.5ChainDB
@@ -2994,6 +3518,7 @@ Relative to the design of traditional information system development, the table 
 
 ```bash
 	setupdatamod DM1 true
+
 ```
 
 ### 5.5.ChainDB writes data
@@ -3007,6 +3532,7 @@ Write database relative to the traditional information system development. On No
 	senditem DM1 key02 '{"text":"Hello World"}'
 	#json data
 	senditem DM1 key03 '{"json":{"name":"name1","age":20}}'
+
 ```
 
 ### 5.5.ChainDB retrieves data
@@ -3048,6 +3574,7 @@ Check data from databased relative to the traditional information system develop
             "ordered" : false
         }
     ]
+
 ```
 
 The data storage is based on the principle that whoever uses should store. Although the all-node wallet stores all the blocks, but if it is not subscribed relevant data storage is not structured and data is not stored. After subscription, relevant data is structured and related out-of-chain application block is synchronized. The pointer points to the application block content in the left rotating chain, which avoids wasting unnecessary disk space. Data content of ChainDB of Node 2
@@ -3099,6 +3626,7 @@ The data storage is based on the principle that whoever uses should store. Altho
             "timereceived" : 1533557402
         }
     ]
+
 ```
 
 are many ways to retrieve the content of data items, including ChainDB, sender of data items, keyword, timestamp, etc. CXCChain adopts a structured data storage method for data storage, so the retrieval efficiency is extremely high.
@@ -3112,6 +3640,7 @@ are many ways to retrieve the content of data items, including ChainDB, sender o
     showdatasenders DM1
 	# Show the specific item published by the ADDRESS publisher in ChainDB
     showdatasenderitems DM1 ADDRESS 
+
 ```
 
 ### 5.5ChainDB advanced usage-JSON merge
@@ -3220,6 +3749,7 @@ are many ways to retrieve the content of data items, including ChainDB, sender o
             "timereceived" : 1533557886
         }
     ]
+
 ```
 
 ## 5.6 Out-of-chain data storage
@@ -3228,14 +3758,15 @@ are many ways to retrieve the content of data items, including ChainDB, sender o
 
 ```bash
 	setupcache
+
 ```
 
 - Get the cache value and call it cache1
-
 - Add the file to the cache
 
 ```bash
 	addcache cache1 file /Users/root/test.jpg
+
 ```
 
 Return file size:956303
@@ -3244,6 +3775,7 @@ Return file size:956303
 
 ```bash
 	senditem DM1 key04 '{"cache":cache1}' outchain
+
 ```
 
 Return to TXID
@@ -3279,6 +3811,7 @@ Return to TXID
             "timereceived" : 1533558597
         }
     ]
+
 ```
 
 - We can see the new items listed. If data is"available" : false  it indicates that the application block outside the chain has not been completed synchronously. We can query the synchronization queue
@@ -3298,12 +3831,14 @@ Return to TXID
             "retrieving" : 0
         }
     }
+
 ```
 
 - Once the block queue is listed as empty,the item's data should be available and its contents can be checked hexadecimally:
 
 ```bash
 	showtxoutdata TXID 0 512
+
 ```
 
 # 6.Scenario intelligent contract reference
@@ -3317,6 +3852,7 @@ Main objective:To set automated atomic transactions and realize the underlying t
 ```bash
 	#Get
 	addnewaddr 
+
 ```
 
 - Issue10,000,000 CCC to A2 from the management address A1 with the minimum unit of 0.01. It cannot be added again.
@@ -3326,6 +3862,7 @@ Main objective:To set automated atomic transactions and realize the underlying t
 	#Return to TXID
 	#Check the issuance of new assets
 	showassets CCC
+
 ```
 
 - Initiate the atomic transaction contract of token financing .
@@ -3343,6 +3880,7 @@ Main objective:To set automated atomic transactions and realize the underlying t
 	  setuprawex TXID1 VOUT1 '{"":500}'
 
 	  #Output HEX1, a hexadecimal block, and then send this HEX1 through ChainDB to all nodes automatically, or to participants offline. 
+
 ```
 
 - Participant 1 participates in the exchange
@@ -3366,6 +3904,7 @@ Main objective:To set automated atomic transactions and realize the underlying t
 	  decoderawex HEX2 true
 
 	 #The exchanges field shows the exchange transaction of all individual offer and ask stages. By now, the address beside participates. 
+
 ```
 
 - Now Participant 2 continues to participate in the exchange:
@@ -3379,6 +3918,7 @@ Main objective:To set automated atomic transactions and realize the underlying t
 	  addrawex HEX2 TXID3 VOUT3 '{"CCC":2000000}' 
 
 	  #Output the longest hexadecimal HEX3
+
 ```
 
 - Participant 3 continues to participate in the exchange
@@ -3396,5 +3936,6 @@ Main objective:To set automated atomic transactions and realize the underlying t
 	  sendrawdeal HEX4
 
 	#Thus, the whole token financing process is completed.  
+
 ```
 
