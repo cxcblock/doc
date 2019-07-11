@@ -188,7 +188,7 @@ showinfo
 
 其中paytxfee为当前节点的基础手续费设置，rpcport为可调用的rpc端口
 
-通过settxfee设置最小手续费
+必须通过settxfee设置最小手续费，否则可能导致优先级不足！！
 
 ```bash
 settxfee 0.0001
