@@ -447,7 +447,85 @@ CXcs server stopping
 ```bash
 	区块hash值
 ```
+#### showdeal
+
+> 方法说明
+
+返回指定的钱包交易明细,此命令只可查询在本节点的地址的相关交易
+
+> 调用命令
+
+```bash
+	showdeal txid
+```
+
+> 方法参数
+> |参数	|描述	|
+> |--	|--	|
+> |txid  |txid	|
+
+> e.g.
+
+```bash
+	showdeal  "txid"
+```
+
+> 返回值
+
+```bash
+{
+    "amount" : "0.00",
+    "fee" : "0.000069",
+    "confirmations" : 10370,
+    "blockhash" : "007191ede930cfxxxxxxxxxxxxxxxxxxxxxxxxxxxfd6a55d2d1802a78f4f51b2",
+    "blockindex" : 4,
+    "blocktime" : 1562300531,
+    "txid" : "c71a6a6de7b4312ba9cd6e1e575861122491e6c17d9b74e6920989cab8c4404f",
+    "walletconflicts" : [
+    ],
+    "valid" : true,
+    "time" : 1562300524,
+    "timereceived" : 1562300524,
+    "details" : [
+        {
+            "account" : "",
+            "address" : "13r6xxxxxxxxxxxxxxxxxxxxxxxxxx6p3snv2",
+            "category" : "send",
+            "amount" : "4.00",
+            "vout" : 0,
+            "fee" : "0.000069"
+        },
+        {
+            "account" : "",
+            "address" : "1JeZz3KS9xxxxxxxxxxxxxxxxxxxx68Syr3diH",
+            "category" : "send",
+            "amount" : "0.019771",
+            "vout" : 1,
+            "fee" : "0.000069"
+        },
+        {
+            "account" : "",
+            "address" : "13r6azRyVEXxxxxxxxxxxxxxxxxfM6p3snv2",
+            "category" : "receive",
+            "amount" : "4.00",
+            "vout" : 0
+        },
+        {
+            "account" : "",
+            "address" : "1JeZz3KS9MAMYxxxxxxxxxxCEr68Syr3diH",
+            "category" : "receive",
+            "amount" : "0.019771",
+            "vout" : 1
+        }
+    ],
+    "hex" : "0100000004c154d448e92dc607xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1f394bf385e213d3b1b56e07b73669336680454d88ac3b4d0000000000001976a914c1950fe62cc53640f6d449572a51ddc17b9e6ff988ac00000000"
+}	
+```
+
+#### 
+
 #### signmessage
+
 > 方法说明
 
 根据私钥对消息进行签名
@@ -811,7 +889,9 @@ CXcs server stopping
 	无
 ```
 注意，节点一旦加密，无论是重启节点还是修改密码，需要调用resume incoming,mining命令。
+
 #### changepass
+
 > 方法说明
 
 更改钱包密码
@@ -864,6 +944,7 @@ CXcs server stopping
 	true|false
 ```
 #### showassets
+
 > 方法说明
 
 返回链中已发行的资产的信息
@@ -2515,7 +2596,38 @@ ChainDB写入地址的信息
 	  "complete": true|false                                 If deal has a complete set of signature (0 if not)
 	}
 ```
+#### showrawdeal
+
+> 方法说明
+
+查询交易信息。
+
+> 调用命令
+
+```bash
+	showrawdeal "txid" 
+```
+
+> 方法参数
+
+|参数			|描述								|
+|--				|--									|
+|txid			|txid								|
+
+> e.g.
+
+```bash
+	showrawdeal "txid"
+```
+
+> 返回值
+
+```bash
+	hex 交易的完整hex信息
+```
+
 #### setuprawsendfrom
+
 > 方法说明
 
 运用指定地址创建交易
@@ -3302,4 +3414,5 @@ ChainDB为信息化系统和Dapp提供了完整解决方案，其侧重于一般
 
 	  #至此，完成了整个代币融资过程。 
 ```
+
 
