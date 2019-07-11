@@ -120,18 +120,21 @@ Allow ip
 
 ```bash
 -rpcallowip=127.0.0.1
+
 ```
 
 Each time a new block is generated, the specified shell command is triggered, where %s is the HASH of the new block.
 
 ```bash
 -blocknotify='curl http://192.168.1.10:8080/cxc?blockHash=%s'
+
 ```
 
 E.g
 
 ```bash
 ./cxcsz CXCChain -datadir=/data/.cxcs -port=7319 -rpcport=7318 -blocknotify=‘curl http://192.168.1.10:8080/cxc?blockHash=%s'
+
 ```
 
 After the chain is started, the startup parameters can be written to the conf configuration file. The configuration file is located at /data/.cxcs/CXCChain/cxcs.conf.
@@ -149,12 +152,14 @@ blocknotify='curl http://192.168.1.10:8080/cxc?blockHash=%s'
 rpcallowip=192.168.0.100
 rpcallowip=192.168.0.101
 rpcallowip=192.168.0.102
+
 ```
 
 The node needs to be restarted after setting.
 
 ```bash
 showinfo
+
 ```
 
 result
@@ -166,6 +171,7 @@ result
     "relayfee" : "0.0001",
     "maxout" : 10000000000000000
 }
+
 ```
 
 Where paytxfee is the base fee setting of the current node, and rpcport is the callable rpc port.
@@ -182,6 +188,7 @@ Where paytxfee is the base fee setting of the current node, and rpcport is the c
    $ curl --user cxcsrpc:Ch6iaD7aPqegYDenzkDz3ttFCaBUTzBeqsmgye5Mn98o --data-binary '{"jsonrpc": "2.0", "id":"rpccall", "method": "setupkeypairs", "configs": [2] }' -H 'content-type: text/plain;' http://127.0.0.1:7318
     
     {"result":[{"address":"address1","pubkey":"pubkey1","privkey":"pribkey1"},{"address":"address2","pubkey":"pubkey2","privkey":"privkey2"}],"error":null,"id":"rpccall"}
+   
    ```
 
    
@@ -196,6 +203,7 @@ There are  two methods to generate recharge address:
 
   ```bash
   ./cxcsi CXCChain addnewaddr
+  
   ```
 
   . /cxcsi CXCChain will be hidden later.
@@ -208,23 +216,25 @@ There are  two methods to generate recharge address:
 
   ```bash
   setupkeypairs (count)
+  
   ```
 
   where,the parameter count is the number of public/private key pairs, and the default is 1. Note that the address created in this way needs to be imported into the wallet through the importaddr or importprivkey command to directly call the transfer command. For example：
 
   - setupkeypairs 100 
   - importaddr '["ADDR1","ADDR2","ADDR3"]' false
-  
+
   ## Check the validity of the address
-  
+
    Check the validity of the account address by calling the following command:
-  
+
   ```bash
   validaddr (address)
+  
   ```
-  
+
     The returned results are as follows:
-  
+
   ```json
   {
     "isvalid" : true|false,           If the address is valid or not.
@@ -234,8 +244,8 @@ There are  two methods to generate recharge address:
     "pubkey" : "publickeyhex",        The hex value of the raw public key
     "iscompressed" : true|false,      If the address is compressed
   }
-  ```
   
+  ```
 
 If the isvalid field is false, it is an invalid address.
 
@@ -249,6 +259,7 @@ To monitor user recharge, first check the block synchronization status and analy
 
 ```bash
   showchain
+
 ```
 
    The returned result is as follows：
@@ -259,30 +270,33 @@ To monitor user recharge, first check the block synchronization status and analy
       "headers" : 14009,
       "bestblockhash" : "00c44114d67728e2ea1ba1c323aa6e4d8ef18d8ee178a6d712634c775fc56614"
   }
+
 ```
 
    Where headers are the number of block headers,Blocks are the number of blocks that have been synchronized.
 
-  ### Analyse the block information
+### Analyse the block information
 
   call the following command：
 
-  ```bash
+```bash
   showblock hash|height 4
-  ```
+
+```
 
  We use the UTXO model, and the exchange needs to analyse the VOUT part of each TX, where value is the local asset, namely CXC, and asset is the created asset. There are two methods to compare recharge information:
 
-  1. The exchange records all transactions related to itself as a record of recharge and withdrawal by users. If There is an address belonging to the exchange in VOUT, the user balance of the recharge address in the database (and possibly including the issuing assets, of course) is modified.
-  2. If there is an address belonging to the exchange in VOUT, first keep the recharge record in the database，wait for several blocks to confirm before modifying the user balance.
+1. The exchange records all transactions related to itself as a record of recharge and withdrawal by users. If There is an address belonging to the exchange in VOUT, the user balance of the recharge address in the database (and possibly including the issuing assets, of course) is modified.
+2. If there is an address belonging to the exchange in VOUT, first keep the recharge record in the database，wait for several blocks to confirm before modifying the user balance.
 
-  ```bash
+```bash
   showblock 14044 4
-  ```
+
+```
 
   the returned results are as follows：
 
-  ```json
+```json
   {
       "hash" : "XXXXXXXXXXXXXXXXXXXXXXXXX",
       "miner" : "1XXXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -414,14 +428,15 @@ To monitor user recharge, first check the block synchronization status and analy
       "prevblockhash" : "002a3322125c41fd2865ee4972d3f59083c048c049ca50a59aba2b325d9eaf1e",
       "nextblockhash" : "000bbf856cfd829bdc665ad09d42ba0d4e4e59ad54411468247c229385077631"
   }
-  ```
 
-  ## Handling withdrawal requests
+```
 
-  1. Record user withdrawal request, and change balance；
-  2. Call the send or sendfrom command to send the transaction to the user's withdrawal address. For details, please refer to the Developer Documentation.
-  3. After the command is successfully executed, txid will be returned and recorded in the database;
-  4. After the block is confirmed, the withdrawal is successful.
+## Handling withdrawal requests
+
+1. Record user withdrawal request, and change balance；
+2. Call the send or sendfrom command to send the transaction to the user's withdrawal address. For details, please refer to the Developer Documentation.
+3. After the command is successfully executed, txid will be returned and recorded in the database;
+4. After the block is confirmed, the withdrawal is successful.
 
 ## Offline signature transaction
 
@@ -429,6 +444,7 @@ To monitor user recharge, first check the block synchronization status and analy
 
 ```bash
 showunspent ( minconf maxconf addresses )
+
 ```
 
 > Configs
@@ -439,11 +455,11 @@ showunspent ( minconf maxconf addresses )
 | maxconf   | Default=9999999 The maximum confirmations to filter |
 | addresses | A json array of addresses to filter                 |
 
-
 > e.g.
 
 ```bash
 	showunspent 6 9999999 "[\"address1\",\"address2\"]"
+
 ```
 
 > result
@@ -461,13 +477,18 @@ showunspent ( minconf maxconf addresses )
     }
     ,...
   ]
+
 ```
 
 ### Assembly transaction
+
   1.The exchange obtains the address by unresolving the unspent by parsing the block. The calling command is as follows:
-  ```bash
+
+```bash
 	setuprawdeal [{"txid":"id","vout":n},...] {"address":amount,...} ( [data] "action" )
-  ```
+
+```
+
 > configs
 
 | Configs   | Description                                                  |
@@ -488,6 +509,7 @@ showunspent ( minconf maxconf addresses )
 }
   or
 "hex"                                                    The deal hash in hex (if action= "send")
+
 ```
 
 2.Set the change address and specify the transaction fee through addrawchange
@@ -496,6 +518,7 @@ showunspent ( minconf maxconf addresses )
 
 ```bash
 	addrawchange "tx-hex" "address" ( fee )
+
 ```
 
 > configs
@@ -511,12 +534,14 @@ showunspent ( minconf maxconf addresses )
 ```bash
 	addrawchange "HEX""ADDR"
 	addrawchange "HEX""ADDR" 0.01
+
 ```
 
 > Result
 
 ```bash
 	hex
+
 ```
 
 The default change address is the originating transfer address.
@@ -531,6 +556,7 @@ It is recommended that the exchange's change address be set separately to preven
 
 ```bash
 	signrawdeal "tx-hex" ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] ["privatekey1",...] sighashtype )
+
 ```
 
 > Configs
@@ -549,6 +575,7 @@ It is recommended that the exchange's change address be set separately to preven
 	  "hex": "value",                           The raw deal with signature(s) (hex-encoded string)
 	  "complete": true|false                    If deal has a complete set of signature (0 if not)
 	}
+
 ```
 
 4.sendrawdeal
@@ -557,7 +584,9 @@ It is recommended that the exchange's change address be set separately to preven
 
 ```bash
 	sendrawdeal "tx-hex" ( allowhighfees )
+
 ```
+
 > Configs
 
 | Configs       | Description                    |
@@ -565,56 +594,177 @@ It is recommended that the exchange's change address be set separately to preven
 | Tx-hex        | The hex string of the raw deal |
 | allowhighfees | Default=false, Allow high fees |
 
-
 > e.g.
 
 ```bash
 	sendrawdeal "signedhex"
+
 ```
 
 > Result
 
 ```bash
 	txid
+
 ```
 
 例：
 
-  ```shell
-
+```shell
 	setuprawdeal '[{"txid":"526be568b3756124701e7d8c639dd3ffba1a40947cc2573fada996c1e08b4c89","vout":0},{"txid":"526be568b3756124701e7d8c639dd3ffba1a40947cc2573fada996c1e08b4c89","vout":1}]'  '{"12c6DSiU4Rq3P4ZxziKxzrL5LmMBrzjrJX":{"":30}}'
 	#result
 0100000002894c8be0c196a9ad3f57c27c94401abaffd39d638c7d1e70246175b368e56b520000000000ffffffff894c8be0c196a9ad3f57c27c94401abaffd39d638c7d1e70246175b368e56b520100000000ffffffff0180c3c901000000004f76a914119b098e2e980a229e139a9ed01a469e518e6f2688ac3473706b71ef28a6c20ae4fd378fbd6eed144bfcff80969800000000000e64ad8c6ebffc4d749dbd3e1f93090f002d3101000000007500000000
-  ```
 
- ### Addrawchange
+```
+
+### Addrawchange
+
 ```shell
 addrawchange 0100000002894c8be0c196a9ad3f57c27c94401abaffd39d638c7d1e70246175b368e56b520000000000ffffffff894c8be0c196a9ad3f57c27c94401abaffd39d638c7d1e70246175b368e56b520100000000ffffffff0180c3c901000000004f76a914119b098e2e980a229e139a9ed01a469e518e6f2688ac3473706b71ef28a6c20ae4fd378fbd6eed144bfcff80969800000000000e64ad8c6ebffc4d749dbd3e1f93090f002d3101000000007500000000 12c6DSiU4Rq3P4ZxziKxzrL5LmMBrzjrJX 0.001
+
 ```
- ### Signrawdeal and sendrawdeal
+
+### Signrawdeal and sendrawdeal
 
 ```shell
 signrawdeal dealhex2 '[]' '["privatekey1","privatekey2"]'
 sendrawdeal dealhex2 
-```
 
+```
 
 ```json
 {
     "hex" : "xxxxxxx",
     "complete" : true
 }
+
 ```
 
 
 
-  ## Related commands
+## Related commands
 
-  ### Check balances
+### Check balances
 
   Use showallbals or showaddrbals to check user balances,The minimum unit of assets is 6.
 
-  ### Set node service fee
+### Query transaction information
+
+#### showdeal
+
+> description
+
+Returns the specified wallet transaction details. This command can only query related transactions at the address of this node.
+
+> command
+
+```bash
+	showdeal txid
+
+```
+
+> parameter 
+
+| parameter | description |
+| --------- | ----------- |
+| txid      | txid        |
+
+> e.g.
+
+```bash
+	showdeal  "txid"
+
+```
+
+> result
+
+```bash
+{
+    "amount" : "0.00",
+    "fee" : "0.000069",
+    "confirmations" : 10370,
+    "blockhash" : "007191ede930cfxxxxxxxxxxxxxxxxxxxxxxxxxxxfd6a55d2d1802a78f4f51b2",
+    "blockindex" : 4,
+    "blocktime" : 1562300531,
+    "txid" : "c71a6a6de7b4312ba9cd6e1e575861122491e6c17d9b74e6920989cab8c4404f",
+    "walletconflicts" : [
+    ],
+    "valid" : true,
+    "time" : 1562300524,
+    "timereceived" : 1562300524,
+    "details" : [
+        {
+            "account" : "",
+            "address" : "13r6xxxxxxxxxxxxxxxxxxxxxxxxxx6p3snv2",
+            "category" : "send",
+            "amount" : "4.00",
+            "vout" : 0,
+            "fee" : "0.000069"
+        },
+        {
+            "account" : "",
+            "address" : "1JeZz3KS9xxxxxxxxxxxxxxxxxxxx68Syr3diH",
+            "category" : "send",
+            "amount" : "0.019771",
+            "vout" : 1,
+            "fee" : "0.000069"
+        },
+        {
+            "account" : "",
+            "address" : "13r6azRyVEXxxxxxxxxxxxxxxxxfM6p3snv2",
+            "category" : "receive",
+            "amount" : "4.00",
+            "vout" : 0
+        },
+        {
+            "account" : "",
+            "address" : "1JeZz3KS9MAMYxxxxxxxxxxCEr68Syr3diH",
+            "category" : "receive",
+            "amount" : "0.019771",
+            "vout" : 1
+        }
+    ],
+    "hex" : "0100000004c154d448e92dc607xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1f394bf385e213d3b1b56e07b73669336680454d88ac3b4d0000000000001976a914c1950fe62cc53640f6d449572a51ddc17b9e6ff988ac00000000"
+}	
+
+```
+
+#### showrawdeal
+
+> description
+
+Query transaction information。
+
+> command
+
+```bash
+	showrawdeal "txid" 
+
+```
+
+> parameter
+
+| parameter | description |
+| --------- | ----------- |
+| txid      | txid        |
+
+> e.g.
+
+```bash
+	showrawdeal "txid"
+
+```
+
+> returned value
+
+```bash
+	hex Complete hex information for the transaction
+
+```
+
+####  
+
+### Set node service fee
 
  The basic fee for node transfer accounts can be set by the method of settxfee, and the specific service fee is charged according to the byte.
 
