@@ -142,14 +142,12 @@ rpc命令端口，如果采用默认，请不要添加
 
 ```bash
 -blocknotify='curl http://192.168.1.10:8080/cxc?blockHash=%s'
-
 ```
 
 例如:
 
 ```bash
 ./cxcsz CXCChain -datadir=/data/.cxcs -port=7319 -rpcport=7318 -blocknotify=‘curl http://192.168.1.10:8080/cxc?blockHash=%s'
-
 ```
 
 链启动后可以将启动参数写到conf配置文件中，配置文件位于/data/.cxcs/CXCChain/cxcs.conf
@@ -167,7 +165,6 @@ blocknotify='curl http://192.168.1.10:8080/cxc?blockHash=%s'
 rpcallowip=192.168.0.100
 rpcallowip=192.168.0.101
 rpcallowip=192.168.0.102
-
 ```
 
 设置后需重启节点。
@@ -176,22 +173,28 @@ rpcallowip=192.168.0.102
 
 ```bash
 showinfo
-
 ```
 
 返回结果为
 
 ```json
 {
-    "paytxfee" : "0.0001",
+    "paytxfee" : "0.00",
     "rpcport" : 7318,
     "relayfee" : "0.0001",
     "maxout" : 10000000000000000
 }
-
 ```
 
 其中paytxfee为当前节点的基础手续费设置，rpcport为可调用的rpc端口
+
+通过settxfee设置最小手续费
+
+```bash
+settxfee 0.0001
+```
+
+再调用showinfo查看信息
 
 ## 如何通过rpc调用命令
 
@@ -211,7 +214,6 @@ showinfo
     $ curl --user cxcsrpc:Ch6iaD7aPqegYDenzkDz3ttFCaBUTzBeqsmgye5Mn98o --data-binary '{"jsonrpc": "2.0", "id":"rpccall", "method": "setupkeypairs", "configs": [2] }' -H 'content-type: text/plain;' http://127.0.0.1:7318
     
     {"result":[{"address":"address1","pubkey":"pubkey1","privkey":"pribkey1"},{"address":"address2","pubkey":"pubkey2","privkey":"privkey2"}],"error":null,"id":"rpccall"}
-   
    ```
 
 ## 生成充值地址
@@ -224,7 +226,6 @@ showinfo
 
   ```bash
   ./cxcsi CXCChain addnewaddr
-  
   ```
 
   后面将隐藏./cxcsi CXCChain.
@@ -237,7 +238,6 @@ showinfo
 
   ```bash
   setupkeypairs (count)
-  
   ```
 
   其中参数count为公钥/私钥对的数量，默认为1，注意这种方式创建的地址需要通过importaddr或者importprivkey的命令将地址导入钱包，才能直接调用转账的命令或者查询未花费输出。
@@ -253,7 +253,6 @@ showinfo
 
   ```bash
   validaddr (address)
-  
   ```
 
   返回结果如下：
@@ -267,7 +266,6 @@ showinfo
     "pubkey" : "publickeyhex",        The hex value of the raw public key
     "iscompressed" : true|false,      If the address is compressed
   }
-  
   ```
 
 若isvalid字段为false，则为无效地址。
@@ -282,7 +280,6 @@ showinfo
 
 ```bash
   showchain
-
 ```
 
   返回结果如下：
@@ -293,7 +290,6 @@ showinfo
       "headers" : 14009,
       "bestblockhash" : "00c44114d67728e2ea1ba1c323aa6e4d8ef18d8ee178a6d712634c775fc56614"
   }
-
 ```
 
   其中headers是区块头的数量，blocks是已同步的区块数量。
@@ -304,7 +300,6 @@ showinfo
 
 ```bash
   showblock hash|height 4
-
 ```
 
   我们采用了UTXO模型，交易所需要解析每个TX中的VOUT部分，其中value为本地资产即CXC,asset为创建的资产。有两种方式比对充值信息：
@@ -314,7 +309,6 @@ showinfo
 
 ```bash
   showblock 10006 4
-
 ```
 
   返回结果：
@@ -481,7 +475,6 @@ showinfo
     "prevblockhash" : "00020c2bffe8027ca9e6a32c53a65725f74ee64e0593292146a47b703be15b9a",
     "nextblockhash" : "00902185d67d4df146a85eeedf4fcbcc805c791595ac872d80583e518a2d920e"
 }
-
 ```
 
 ## 处理提现请求
@@ -491,7 +484,6 @@ showinfo
 2. 调用send或者sendfrom命令，向用户提现地址发送交易，具体使用方法请参考《开发者文档》；
 3. 调用命令成功后将返回txid，记录在数据库中；
 4. 等待区块确认后，即为提现成功。
-
 ```
 
 ## 离线交易
@@ -502,7 +494,6 @@ showinfo
 
 ```bash
 showunspent ( minconf maxconf addresses )
-
 ```
 
 > 方法参数
@@ -517,7 +508,6 @@ showunspent ( minconf maxconf addresses )
 
 ```bash
 	showunspent 6 9999999 "[\"address1\",\"address2\"]"
-
 ```
 
 > 返回值
@@ -535,7 +525,6 @@ showunspent ( minconf maxconf addresses )
     }
     ,...
   ]
-
 ```
 
 ### 组装交易
@@ -544,7 +533,6 @@ showunspent ( minconf maxconf addresses )
 
 ```bash
 	setuprawdeal [{"txid":"id","vout":n},...] {"address":amount,...} ( [data] "action" )
-
 ```
 
 > 方法参数
@@ -566,7 +554,6 @@ showunspent ( minconf maxconf addresses )
 	  "hex": "value",                                        The raw deal with signature(s) (hex-encoded string)
 	  "complete": true|false                                 If deal has a complete set of signature (0 if not)
 	}
-
 ```
 
 2.通过addrawchange设置找零地址以及指定交易手续费
@@ -575,7 +562,6 @@ showunspent ( minconf maxconf addresses )
 
 ```bash
 	addrawchange "tx-hex" "address" ( fee )
-
 ```
 
 > 方法参数
@@ -591,14 +577,12 @@ showunspent ( minconf maxconf addresses )
 ```bash
 	addrawchange "HEX""ADDR"
 	addrawchange "HEX""ADDR" 0.01
-
 ```
 
 > 返回值
 
 ```bash
 	hex
-
 ```
 
 建议交易所的找零地址单独设置，防止解析vout找零重复。
@@ -611,7 +595,6 @@ showunspent ( minconf maxconf addresses )
 
 ```bash
 	signrawdeal "tx-hex" ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] ["privatekey1",...] sighashtype )
-
 ```
 
 > 方法参数
@@ -630,7 +613,6 @@ showunspent ( minconf maxconf addresses )
 	  "hex": "value",                           The raw deal with signature(s) (hex-encoded string)
 	  "complete": true|false                    If deal has a complete set of signature (0 if not)
 	}
-
 ```
 
 若complete为true，则签名成功，否则失败
@@ -641,7 +623,6 @@ showunspent ( minconf maxconf addresses )
 
 ```bash
 	sendrawdeal "tx-hex" ( allowhighfees )
-
 ```
 
 > 方法参数
@@ -655,14 +636,12 @@ showunspent ( minconf maxconf addresses )
 
 ```bash
 	sendrawdeal "signedhex"
-
 ```
 
 > 返回值
 
 ```bash
 	txid
-
 ```
 
 例：
@@ -672,7 +651,6 @@ showunspent ( minconf maxconf addresses )
 	setuprawdeal '[{"txid":"526be568b3756124701e7d8c639dd3ffba1a40947cc2573fada996c1e08b4c89","vout":0},{"txid":"526be568b3756124701e7d8c639dd3ffba1a40947cc2573fada996c1e08b4c89","vout":1}]'  '{"12c6DSiU4Rq3P4ZxziKxzrL5LmMBrzjrJX":{"":30}}'
 	#返回 dealhex
 0100000002894c8be0c196a9ad3f57c27c94401abaffd39d638c7d1e70246175b368e56b520000000000ffffffff894c8be0c196a9ad3f57c27c94401abaffd39d638c7d1e70246175b368e56b520100000000ffffffff0180c3c901000000004f76a914119b098e2e980a229e139a9ed01a469e518e6f2688ac3473706b71ef28a6c20ae4fd378fbd6eed144bfcff80969800000000000e64ad8c6ebffc4d749dbd3e1f93090f002d3101000000007500000000
-
 ```
 
 ### 设置上一步Hex的找零地址12c6DSiU4Rq3P4ZxziKxzrL5LmMBrzjrJX 与 手续费 0.001
@@ -680,7 +658,6 @@ showunspent ( minconf maxconf addresses )
 ```shell
 addrawchange 0100000002894c8be0c196a9ad3f57c27c94401abaffd39d638c7d1e70246175b368e56b520000000000ffffffff894c8be0c196a9ad3f57c27c94401abaffd39d638c7d1e70246175b368e56b520100000000ffffffff0180c3c901000000004f76a914119b098e2e980a229e139a9ed01a469e518e6f2688ac3473706b71ef28a6c20ae4fd378fbd6eed144bfcff80969800000000000e64ad8c6ebffc4d749dbd3e1f93090f002d3101000000007500000000 12c6DSiU4Rq3P4ZxziKxzrL5LmMBrzjrJX 0.001
 #返回带找零地址的dealhex2
-
 ```
 
 ### 为交易进行签名并广播交易
@@ -691,7 +668,6 @@ signrawdeal dealhex2 '[]' '["privatekey1","privatekey2"]'
 #若在含有私钥的节点进行签名广播
 sendrawdeal dealhex2 
 返回签名后的hex与complete字段。当complete字段为true时 代表所有unspent均被签名可以进行广播
-
 ```
 
 ```json
@@ -699,7 +675,6 @@ sendrawdeal dealhex2
     "hex" : "xxxxxxx",
     "complete" : true
 }
-
 ```
 
 ## 相关命令
@@ -720,7 +695,6 @@ sendrawdeal dealhex2
 
 ```bash
 	showdeal txid
-
 ```
 
 > 方法参数
@@ -732,7 +706,6 @@ sendrawdeal dealhex2
 
 ```bash
 	showdeal  "txid"
-
 ```
 
 > 返回值
@@ -785,7 +758,6 @@ sendrawdeal dealhex2
     ],
     "hex" : "0100000004c154d448e92dc607xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1f394bf385e213d3b1b56e07b73669336680454d88ac3b4d0000000000001976a914c1950fe62cc53640f6d449572a51ddc17b9e6ff988ac00000000"
 }	
-
 ```
 
 #### showrawdeal
@@ -798,7 +770,6 @@ sendrawdeal dealhex2
 
 ```bash
 	showrawdeal "txid" 
-
 ```
 
 > 方法参数
@@ -811,14 +782,12 @@ sendrawdeal dealhex2
 
 ```bash
 	showrawdeal "txid"
-
 ```
 
 > 返回值
 
 ```bash
 	hex 交易的完整hex信息
-
 ```
 
 ####  
