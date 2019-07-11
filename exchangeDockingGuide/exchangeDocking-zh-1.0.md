@@ -555,6 +555,21 @@ showunspent ( minconf maxconf addresses )
 	  "complete": true|false                                 If deal has a complete set of signature (0 if not)
 	}
 ```
+注意将手续费的vin拼入，
+
+字节数的计算方式如下：
+
+10+vin的个数 * 180+vout的个数 * 34
+
+如果vin中包含发行资产
+
++10+vin中包含的发行资产的种类数量 * 24
+
+如果包含元数据（data）
+
++11+元数据字节数
+
+手续费=字节数 * 0.0000001
 
 2.通过addrawchange设置找零地址以及指定交易手续费
 
