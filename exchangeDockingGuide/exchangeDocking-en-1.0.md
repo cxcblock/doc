@@ -511,6 +511,21 @@ showunspent ( minconf maxconf addresses )
 "hex"                                                    The deal hash in hex (if action= "send")
 
 ```
+Pay attention to the vin of the fee,
+
+The number of bytes is calculated as follows:
+
+10+vin * 180+vout * 34
+
+If vin contains issued assets
+
++10+( Number of types of assets issued )* 24
+
+If you include metadata (data)
+
++11+ metadata bytes
+
+Handling fee = number of bytes * 0.0000001
 
 2.Set the change address and specify the transaction fee through addrawchange
 
