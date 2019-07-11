@@ -820,7 +820,7 @@ the wallet for the encrypted node for the first time, use password as the unlock
 ```bash
   No
 ```
-Note that once the node is encrypted, whether it is to restart the node or change the password, you need to call the resume incoming, pause command.
+Note that once the node is encrypted, whether it is to restart the node or change the password, you need to call the resume incoming, mining command.
 #### changepass
 > description
 
