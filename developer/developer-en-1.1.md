@@ -1,4 +1,4 @@
-#1 CXCChain introduction
+# 1 CXCChain introduction
 
 CXC public blockchain is the founding body. In its system, whether you are a merchant, an individual or a developer, you can rely on multi-layer information marketing intelligent
 contract for fast fission as cells. DNA, that is CXC blockchain business
@@ -820,6 +820,7 @@ the wallet for the encrypted node for the first time, use password as the unlock
 ```bash
   No
 ```
+Note that once the node is encrypted, whether it is to restart the node or change the password, you need to call the resume incoming, pause command.
 #### changepass
 > description
 
