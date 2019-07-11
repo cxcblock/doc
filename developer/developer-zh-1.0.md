@@ -1,4 +1,4 @@
-#1 CXCChain简介
+# 1 CXCChain简介
 
 CXC公链为多国极客团体联合开发，为整合了跨链技术、poA挖矿、原子交易、链商生态、通货紧缩经济模型、去中心化交易所+云盘+社交的次世代公链。
 
@@ -810,6 +810,7 @@ CXcs server stopping
 ```bash
 	无
 ```
+注意，节点一旦加密，无论是重启节点还是修改密码，需要调用resume incoming,mining命令。
 #### changepass
 > 方法说明
 
