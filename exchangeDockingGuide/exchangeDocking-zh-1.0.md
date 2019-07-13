@@ -831,5 +831,6 @@ integinterval    两次自动归集之间的延迟时间，单位为秒
 
 > e.g.
 
-bash
+```bash
 	cxcsz CXCChain -integminin=50 -integmaxin=100 -integinterval=100
+```
