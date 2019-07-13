@@ -784,5 +784,21 @@ Query transaction information。
  The basic fee for node transfer accounts can be set by the method of settxfee, and the specific service fee is charged according to the byte.
 
   
+### Set node collection
 
+To improve node performance, the current node automatically combines a large number of unused outputs (UTXO) belonging to the same address into one unused output. The default number is 50.
+
+	Depending on the situation, the following collection parameters can be specified when the node is running:
+
+integminin    The minimum number of unused outputs that trigger automatic collection
+
+integmaxin   Maximum number of unused outputs for an aggregated transaction
+
+integinterval   Delay between two automatic collections, in seconds
+
+> e.g.
+
+```bash
+	cxcsz CXCChain -integminin=50 -integmaxin=100 -integinterval=100
+```
   
