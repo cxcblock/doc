@@ -816,3 +816,20 @@ sendrawdeal dealhex2
   
 
 ###  
+
+### 设置节点归集
+
+	为提高节点性能，当前节点会将属于同一地址的大量未使用输出（UTXO）自动组合成一个未使用的输出，默认数量是50。
+
+	根据不同情况，可在节点运行时指定以下归集参数：
+
+integminin    触发自动归集的最低未使用输出数量
+
+integmaxin    一次归集交易的最大未使用输出数量
+
+integinterval    两次自动归集之间的延迟时间，单位为秒
+
+> e.g.
+
+bash
+	cxcsz CXCChain -integminin=50 -integmaxin=100 -integinterval=100
