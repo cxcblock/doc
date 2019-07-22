@@ -603,8 +603,6 @@ showunspent ( minconf maxconf addresses )
 
 建议交易所的找零地址单独设置，防止解析vout找零重复。
 
-其中vout的最后一条为找零记录。
-
 3.通过signrawdeal进行离线私钥签名交易
 
 > 调用命令
