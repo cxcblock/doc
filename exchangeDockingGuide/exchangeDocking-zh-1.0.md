@@ -824,8 +824,13 @@ integmaxin    一次归集交易的最大未使用输出数量
 
 integinterval    两次自动归集之间的延迟时间，单位为秒
 
+
 > e.g.
 
 ```bash
 	cxcsz CXCChain -integminin=50 -integmaxin=100 -integinterval=100
 ```
+
+### 节点加解密
+	节点加解密详情参考https://github.com/cxcblock/doc/tree/master/developer
+	
