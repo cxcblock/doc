@@ -888,7 +888,7 @@ CXcs server stopping
 ```bash
 	无
 ```
-注意，节点一旦加密，无论是重启节点还是修改密码，需要调用resume incoming,mining命令。
+注意，节点一旦加密，无论是重启节点还是修改密码，需要先解密然后调用resume incoming,mining命令，重启节点同步状态。
 
 #### changepass
 
