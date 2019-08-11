@@ -176,6 +176,14 @@ result
 
 Where paytxfee is the base fee setting of the current node, and rpcport is the callable rpc port.
 
+The minimum fee must be set by settxfee, otherwise it may result in insufficient priority! !
+
+```bash
+settxfee 0.0001
+```
+
+Call showinfo to view the information.
+
 ## How to call a command via rpc
 
 1. Confirm that the caller IP has been assigned to allowip.
@@ -203,40 +211,37 @@ There are  two methods to generate recharge address:
 
   ```bash
   ./cxcsi CXCChain addnewaddr
-  
   ```
-
-  . /cxcsi CXCChain will be hidden later.
-
-  The created address will be imported directly into the wallet file.
-
+  
+. /cxcsi CXCChain will be hidden later.
+  
+The created address will be imported directly into the wallet file.
+  
 - Method II：Create wallet address in batches in advance. 
 
   Call the following command：
 
   ```bash
   setupkeypairs (count)
-  
   ```
-
-  where,the parameter count is the number of public/private key pairs, and the default is 1. Note that the address created in this way needs to be imported into the wallet through the importaddr or importprivkey command to directly call the transfer command. For example：
-
-  - setupkeypairs 100 
+  
+where,the parameter count is the number of public/private key pairs, and the default is 1. Note that the address created in this way needs to be imported into the wallet through the importaddr or importprivkey command to directly call the transfer command. For example：
+  
+- setupkeypairs 100 
   - importaddr '["ADDR1","ADDR2","ADDR3"]' false
-
-  ## Check the validity of the address
-
-   Check the validity of the account address by calling the following command:
-
-  ```bash
-  validaddr (address)
   
+## Check the validity of the address
+  
+ Check the validity of the account address by calling the following command:
+  
+```bash
+  validaddr (address)
   ```
-
+  
     The returned results are as follows:
 
   ```json
-  {
+{
     "isvalid" : true|false,           If the address is valid or not.
   "address" : "address",            The address validated
     "ismine" : true|false,            If the address is yours or not
@@ -259,7 +264,6 @@ To monitor user recharge, first check the block synchronization status and analy
 
 ```bash
   showchain
-
 ```
 
    The returned result is as follows：
@@ -270,7 +274,6 @@ To monitor user recharge, first check the block synchronization status and analy
       "headers" : 14009,
       "bestblockhash" : "00c44114d67728e2ea1ba1c323aa6e4d8ef18d8ee178a6d712634c775fc56614"
   }
-
 ```
 
    Where headers are the number of block headers,Blocks are the number of blocks that have been synchronized.
@@ -281,7 +284,6 @@ To monitor user recharge, first check the block synchronization status and analy
 
 ```bash
   showblock hash|height 4
-
 ```
 
  We use the UTXO model, and the exchange needs to analyse the VOUT part of each TX, where value is the local asset, namely CXC, and asset is the created asset. There are two methods to compare recharge information:
@@ -290,8 +292,7 @@ To monitor user recharge, first check the block synchronization status and analy
 2. If there is an address belonging to the exchange in VOUT, first keep the recharge record in the database，wait for several blocks to confirm before modifying the user balance.
 
 ```bash
-  showblock 14044 4
-
+  showblock 10006 4
 ```
 
   the returned results are as follows：
@@ -444,7 +445,6 @@ To monitor user recharge, first check the block synchronization status and analy
 
 ```bash
 showunspent ( minconf maxconf addresses )
-
 ```
 
 > Configs
@@ -459,7 +459,6 @@ showunspent ( minconf maxconf addresses )
 
 ```bash
 	showunspent 6 9999999 "[\"address1\",\"address2\"]"
-
 ```
 
 > result
@@ -477,7 +476,6 @@ showunspent ( minconf maxconf addresses )
     }
     ,...
   ]
-
 ```
 
 ### Assembly transaction
@@ -486,7 +484,6 @@ showunspent ( minconf maxconf addresses )
 
 ```bash
 	setuprawdeal [{"txid":"id","vout":n},...] {"address":amount,...} ( [data] "action" )
-
 ```
 
 > configs
@@ -533,7 +530,6 @@ Handling fee = number of bytes * 0.0000001
 
 ```bash
 	addrawchange "tx-hex" "address" ( fee )
-
 ```
 
 > configs
@@ -549,14 +545,12 @@ Handling fee = number of bytes * 0.0000001
 ```bash
 	addrawchange "HEX""ADDR"
 	addrawchange "HEX""ADDR" 0.01
-
 ```
 
 > Result
 
 ```bash
 	hex
-
 ```
 
 The default change address is the originating transfer address.
@@ -590,7 +584,6 @@ It is recommended that the exchange's change address be set separately to preven
 	  "hex": "value",                           The raw deal with signature(s) (hex-encoded string)
 	  "complete": true|false                    If deal has a complete set of signature (0 if not)
 	}
-
 ```
 
 4.sendrawdeal
@@ -613,14 +606,12 @@ It is recommended that the exchange's change address be set separately to preven
 
 ```bash
 	sendrawdeal "signedhex"
-
 ```
 
 > Result
 
 ```bash
 	txid
-
 ```
 
 例：
@@ -675,7 +666,6 @@ Returns the specified wallet transaction details. This command can only query re
 
 ```bash
 	showdeal txid
-
 ```
 
 > parameter 
@@ -783,7 +773,7 @@ Query transaction information。
 
  The basic fee for node transfer accounts can be set by the method of settxfee, and the specific service fee is charged according to the byte.
 
-  
+
 ### Set node collection
 
 To improve node performance, the current node automatically combines a large number of unused outputs (UTXO) belonging to the same address into one unused output. The default number is 50.
@@ -801,4 +791,8 @@ integinterval   Delay between two automatic collections, in seconds
 ```bash
 	cxcsz CXCChain -integminin=50 -integmaxin=100 -integinterval=100
 ```
-  
+
+### Node encryption and decryption
+
+For details on node encryption and decryption, please refer to https://github.com/cxcblock/doc/tree/master/developer
+
