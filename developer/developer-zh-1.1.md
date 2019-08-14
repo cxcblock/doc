@@ -13,13 +13,13 @@ CXC公链为多国极客团体联合开发，为整合了跨链技术、poA挖�
 1.发起远程调用时向区块链节点传输格式例如以下:
 
 ```json
-	{ "method": "showinfo", "configs": [], "id": 1}
+	{ "method": "showinfo", "params": [], "id": 1}
 ```
 > 参数说明：
 
 ```
 	 method:调用的方法名
-	 configs:方法传入的参数。数组类型。
+	 params:方法传入的参数。数组类型。
 	 id:调用标识符。用于标示一次远程调用过程
 ```
 2.区块链节点其收到调用请求，处理方法调用，将方法效用结果效应给调用方；返回数据格式:
@@ -41,7 +41,7 @@ RPC用户名密码存储在~/.cxcs/CXCChain/cxcs.conf（linux/MAC）或%APPDATA%
 > 命令方式运行：
 
 ```bash
-	[command] [configs]
+	[command] [params]
 ```
 ## 2.3 可用API指令
 
@@ -50,6 +50,7 @@ RPC用户名密码存储在~/.cxcs/CXCChain/cxcs.conf（linux/MAC）或%APPDATA%
 **调用命令的方式 cxcsi CXCChain (command),例如cxcsi CXCChain help.
 
 #### help
+
 > 方法说明
 
 返回可用命令列表
@@ -76,6 +77,7 @@ RPC用户名密码存储在~/.cxcs/CXCChain/cxcs.conf（linux/MAC）或%APPDATA%
 若无参数显示命令列表，若有参数显示该命令的使用方法
 
 #### stop
+
 > 方法说明
 
 停止区块链运行
@@ -94,6 +96,7 @@ RPC用户名密码存储在~/.cxcs/CXCChain/cxcs.conf（linux/MAC）或%APPDATA%
 CXcs server stopping
 
 #### pause
+
 > 方法说明
 
 暂停区块链
@@ -133,6 +136,7 @@ CXcs server stopping
 |参数	|描述												|
 |--		|--													|
 |task(s)|要重启的服务，可能的值为incoming,mining,outchain	|
+
 > e.g.
 
 ```bash
@@ -143,6 +147,7 @@ CXcs server stopping
 
 无
 #### showmem
+
 > 方法说明
 
 返回内存池信息
@@ -165,6 +170,7 @@ CXcs server stopping
 	}
 ```
 #### addnode
+
 > 方法说明
 
 手动添加或删除点对点连接
@@ -175,16 +181,19 @@ CXcs server stopping
 	addnode "node" "add"|"remove"|"onetry"
 ```
 > 方法参数
+
 |参数	|描述	|
 |--	|--	|
 |node	|节点	|
 |command	|add将节点加入连接集合;remove将节点删除出集合;onetry尝试连接节点测试	|
+
 > e.g.
 
 ```bash
 	addnode "ip:port" "add"
 ```
 #### shownode
+
 > 方法说明
 
 查询连接节点
@@ -195,6 +204,7 @@ CXcs server stopping
 	shownode  ( "node" )
 ```
 > 方法参数
+
 |参数	|描述	|
 |--	|--	|
 |(boolean)true/false|true=返回关于使用addnode添加节点的信息，false=返回使用addnode添加节点的列表	|
@@ -225,6 +235,7 @@ CXcs server stopping
 	]
 ```
 #### shownet
+
 > 方法说明
 
 返回连接的网络IP及端口信息
@@ -317,6 +328,7 @@ CXcs server stopping
 	]
 ```
 #### showchain
+
 > 方法说明
 
 显示链信息
@@ -340,6 +352,7 @@ CXcs server stopping
 	}
 ```
 #### showblock
+
 > 方法说明
 
 查看指定hash|height的区块信息
@@ -401,7 +414,9 @@ CXcs server stopping
 ```bash
 	showblocks block-set-identifier ( false|true )
 ```
+
 > 方法参数
+
 |参数	|描述	|
 |--	|--	|
 |block-set-identifier	|区块高度或区块哈希或区块哈希/高度的集合或时间范围{"starttime" : start-time         Start time."endtime" : end-time             End time.}	|
@@ -421,6 +436,7 @@ CXcs server stopping
 	区块信息集合
 ```
 #### showblockhash
+
 > 方法说明
 
 返回指定高度块的HASH值
@@ -430,7 +446,9 @@ CXcs server stopping
 ```bash
 	showblockhash index
 ```
+
 > 方法参数
+
 |参数	|描述	|
 |--	|--	|
 |index	|区块高度	|
@@ -460,9 +478,10 @@ CXcs server stopping
 ```
 
 > 方法参数
-> |参数	|描述	|
-> |--	|--	|
-> |txid  |txid	|
+
+|参数	|描述	|
+|--	|--	|
+|txid  |txid	|
 
 > e.g.
 
@@ -535,7 +554,9 @@ CXcs server stopping
 ```bash
 	signmessage "address|privkey" "message"
 ```
+
 > 方法参数
+
 |参数		|描述			|
 |--			|--				|
 |address|privkey	|地址或私钥，若为地址，则必须保证该地址的私钥也在节点上			|
@@ -554,6 +575,7 @@ CXcs server stopping
 	签名后的字符串
 ```
 #### checkmessage
+
 > 方法说明
 
 验证消息
@@ -578,7 +600,9 @@ CXcs server stopping
 			true|false
 ```
 ### 4.3.2管理钱包地址密钥
+
 #### addnewaddr
+
 > 方法说明
 
 创建一个新地址
@@ -598,6 +622,7 @@ CXcs server stopping
 	创建出的新地址
 ```
 #### addmultiaddr
+
 > 方法说明
 
 创建多签地址并添加至节点
@@ -627,6 +652,7 @@ CXcs server stopping
 	多签地址
 ```
 #### setupmulti
+
 > 方法说明
 
 创建多签地址但不加入钱包，不建议使用
@@ -658,6 +684,7 @@ CXcs server stopping
 	}
 ```
 #### setupkeypairs
+
 > 方法说明
 
 生成一个或多个公钥/私钥对，默认1
@@ -692,6 +719,7 @@ CXcs server stopping
 	]
 ```
 #### showaddrs
+
 > 方法说明
 
 返回此节点钱包中的地址详细信息
@@ -702,6 +730,7 @@ CXcs server stopping
 	showaddrs ( addr(es) count start )
 ```
 > 方法参数
+
 |方法	|参数	|
 |--	|--	|
 |addr(es)	|*（显示所有地址）或addr(单个地址)或地址数组，默认为*	|
@@ -723,6 +752,7 @@ CXcs server stopping
 	地址对象的数组
 ```
 #### dumpprivkey
+
 > 方法说明
 
 导出私钥
@@ -745,6 +775,7 @@ CXcs server stopping
 	私钥
 ```
 #### importprivkey
+
 > 方法说明
 
 导入私钥
@@ -754,6 +785,7 @@ CXcs server stopping
 ```bash
 	importprivkey privkey(s)
 ```
+
 > 方法参数
 
 |参数		|描述									|
@@ -775,6 +807,7 @@ CXcs server stopping
 	无
 ```
 #### importaddr
+
 > 方法说明
 
 将address 添加到钱包中(无私钥),创建一个或多个只读账户
@@ -804,6 +837,7 @@ CXcs server stopping
 	无
 ```
 #### backupwallet
+
 > 方法说明
 
 备份wallet.dat钱包文件
@@ -832,6 +866,7 @@ CXcs server stopping
 	无
 ```
 #### dumpwallet
+
 > 方法说明
 
 将钱包中的全部私钥转储为文本文件
@@ -860,6 +895,7 @@ CXcs server stopping
 	无
 ```
 #### encryptwallet
+
 > 方法说明
 
 首次加密节点的钱包， 使用password作为解锁密码
@@ -870,6 +906,7 @@ CXcs server stopping
 ```bash
 	encryptwallet "password"
 ```
+
 > 方法参数
 
 |	参数|描述	|
@@ -915,6 +952,7 @@ CXcs server stopping
 	无
 ```
 #### walletpass
+
 > 方法说明
 
 使用password解锁节点的钱包, 在time时间内有效。
@@ -977,6 +1015,7 @@ CXcs server stopping
 	一个资产集合
 ```
 #### showaddrbals
+
 > 方法说明
 
 返回此账户节点钱包中所有资产余额的列表
@@ -1008,6 +1047,7 @@ CXcs server stopping
 	每个地址余额
 ```
 #### showallbals
+
 > 方法说明
 
 返回addresses指定的此节点钱包中的余额列表(包含原生货币)
@@ -1059,6 +1099,7 @@ CXcs server stopping
 }
 ```
 #### showaddrdeal
+
 > 方法说明
 
 返回此账户地址的交易记录
@@ -1113,6 +1154,7 @@ CXcs server stopping
 	
 ```
 #### showaddrdeals
+
 > 方法说明
 
 返回此账户地址的交易信息
@@ -1168,6 +1210,7 @@ CXcs server stopping
 	]
 ```
 #### showwalletdeal
+
 > 方法说明
 
 提供有关txid此节点钱包中的交易的信息
@@ -1320,6 +1363,7 @@ CXcs server stopping
 	]
 ```
 #### showassetdeal
+
 > 方法说明
 
 根据资产id与txid查询交易详情
@@ -1353,6 +1397,7 @@ CXcs server stopping
 	"deal"                              Info about an individual deal from the perspective of a particular asset.
 ```
 #### showassetdeals
+
 > 方法说明
 
 查询特定资产的交易信息
@@ -1385,6 +1430,7 @@ CXcs server stopping
 	List of deals
 ```
 #### send
+
 > 方法说明
 
 发送一个或多个资产
@@ -1416,6 +1462,7 @@ CXcs server stopping
 	txid
 ```
 #### sendfrom
+
 > 方法说明
 
 指定地址发起转账
@@ -1449,6 +1496,7 @@ CXcs server stopping
 	txid
 ```
 #### sendasset
+
 > 方法说明
 
 发送一定数量的资产到指定地址
@@ -1483,6 +1531,7 @@ CXcs server stopping
 	txid
 ```
 #### sendassetfrom
+
 > 方法说明
 
 指定地址发起转账
@@ -1518,6 +1567,7 @@ CXcs server stopping
 	txid
 ```
 #### senddata
+
 > 方法说明
 
 类似send， 附加数据
@@ -1549,6 +1599,7 @@ CXcs server stopping
 	txid
 ```
 #### senddatafrom
+
 > 方法说明
 
 指定地址发起转账并携带数据。
@@ -1580,6 +1631,7 @@ CXcs server stopping
 	txid
 ```
 #### validaddr
+
 > 方法说明
 
 校验地址是否正确
@@ -1617,6 +1669,7 @@ CXcs server stopping
 ### 4.3.3创建发行资产/ChainDB
 
 #### sell
+
 > 方法说明
 
 向地址发行一定数量的资产
@@ -1652,6 +1705,7 @@ CXcs server stopping
 	txid
 ```
 #### sellfrom
+
 > 方法说明
 
 通过特定地址进行发行
@@ -1686,6 +1740,7 @@ CXcs server stopping
 	txid
 ```
 #### sellasset
+
 > 方法说明
 
 向指定地址追加发行一定数量的资产
@@ -1717,6 +1772,7 @@ CXcs server stopping
 	txid
 ```
 #### sellassetfrom
+
 > 方法说明
 
 用特定地址向指定地址追加发行一定数量的资产
@@ -1750,6 +1806,7 @@ CXcs server stopping
 	txid
 ```
 #### setupdatamod
+
 > 方法说明
 
 创建ChainDB，ChainDB以key-value的形式存储在区块链中
@@ -1781,6 +1838,7 @@ CXcs server stopping
 	txid
 ```
 #### setupdatamodfrom
+
 > 方法说明
 
 用特定地址创建ChainDB
@@ -1812,6 +1870,7 @@ CXcs server stopping
 	txid
 ```
 #### senditem
+
 > 方法说明
 
 向ChainDB写入数据
@@ -1842,6 +1901,7 @@ CXcs server stopping
 	txid
 ```
 #### senditemfrom
+
 > 方法说明
 
 根据特定地址写入ChainDB
