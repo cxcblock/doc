@@ -107,13 +107,13 @@ Storage directory
 Blockchain port
 
 ```bash
--port=7519
+-port=7319
 ```
 
 Rpc port
 
 ```bash
--rpcport=7518
+-rpcport=7318
 ```
 
 Allow ip
