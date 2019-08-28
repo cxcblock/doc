@@ -123,13 +123,13 @@ cxcsz.exe CXCChain@ip:port
 区块链端口，如果采用默认，请不要添加
 
 ```bash
--port=7519
+-port=7319
 ```
 
 rpc命令端口，如果采用默认，请不要添加
 
 ```bash
--rpcport=7518
+-rpcport=7318
 ```
 
 允许调用rpc的ip，如果不设定，请不要添加
