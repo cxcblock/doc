@@ -302,7 +302,7 @@ settxfee 0.0001
   showblock hash|height 4
 ```
 
-  我们采用了UTXO模型，交易所需要解析每个TX中的VOUT部分，其中value为本地资产即CXC,asset为创建的资产。有两种方式比对充值信息：
+  我们采用了UTXO模型，交易所需要解析每个TX中的VOUT部分，其中value为本地资产即CXC,assets为发行资产（在进行发行资产转账时需要消耗CXC作为手续费）。有两种方式比对充值信息：
 
 1. 交易所记录下所有和自己相关的交易，作为用户充值提现的记录。如果发现在VOUT中有属于交易所的地址，则修改数据库中该充值地址的用户余额（当然也可能包含发行资产）.
 2. 如果在VOUT中有属于交易所的地址，先在数据库中记录下充值记录，等待几个区块确认后再修改用户余额，注意此处需要检查vin和vout中的重复地址，判断vout中是转账行为、归集行为还是找零行为。
@@ -479,13 +479,13 @@ settxfee 0.0001
 
 ## 处理提现请求
 
-```
+
 1. 记录用户提现请求，更改余额；
-2. 调用send或者sendfrom命令，向用户提现地址发送交易，具体使用方法请参考《开发者文档》；
+2. 调用send或者sendfrom命令，向用户提现地址发送交易，具体使用方法请参考《[开发者文档](https://github.com/cxcblock/doc/tree/master/developer)》；
 3. 调用命令成功后将返回txid，记录在数据库中；
 4. 等待区块确认后，即为提现成功。
-```
-注意，通过send或者sendfrom命令进行转账时，默认会找零会发起转账的地址。
+
+注意，通过send或者sendfrom命令进行转账时，默认会找零会发起转账的地址，如需指定找零地址，请采用离线交易的方式。
 
 ## 离线交易
 
@@ -536,6 +536,8 @@ showunspent ( minconf maxconf addresses )
 	setuprawdeal [{"txid":"id","vout":n},...] {"address":amount,...} ( [data] "action" )
 ```
 
+注：如果是进行发行资产的转账，请包含一个含有原生资产（CXC）的UTXO作为手续费。
+
 > 方法参数
 
 | 参数      | 描述                                                         |
@@ -564,11 +566,11 @@ showunspent ( minconf maxconf addresses )
 
 如果vin中包含发行资产
 
-+10+vin中包含的发行资产的种类数量 * 24
++10+（包含发行资产的vin的数量+包含发行资产的vout的数量） * 24
 
 如果包含元数据（data）
 
-+11+元数据字节数
++11+元数据16进制的字节数
 
 手续费=字节数 * 0.0000001
 
@@ -815,7 +817,7 @@ sendrawdeal dealhex2
 ### 设置节点归集
 
 	为提高节点性能，当前节点会将属于同一地址的大量未使用输出（UTXO）自动组合成一个未使用的输出，默认数量是50。
-
+	
 	根据不同情况，可在节点运行时指定以下归集参数：
 
 integminin    触发自动归集的最低未使用输出数量
@@ -833,4 +835,43 @@ integinterval    两次自动归集之间的延迟时间，单位为秒
 
 ### 节点加解密
 	节点加解密详情参考https://github.com/cxcblock/doc/tree/master/developer
-	
+
+### 查看发行资产基本信息
+
+通过以下命令可查看链上发行资产的基本信息
+
+#### showassets
+
+> 方法说明
+
+返回链中已发行的资产的信息
+
+> 调用命令
+
+```bash
+	showassets ( asset-id(s) detail count start )
+```
+
+> 方法参数
+
+| 参数        | 描述                                                       |
+| ----------- | ---------------------------------------------------------- |
+| asset-id(s) | 资产名称或资产id或资产名称集合或资产id集合                 |
+| detail      | true or false,默认为false,若为true，则显示资产更详细的信息 |
+| count       | 显示数量,默认为INT_MAX                                     |
+| start       | 默认为-count                                               |
+
+> e.g.
+
+```bash
+	showassets
+	showassets "AAA"
+```
+
+> 返回值
+
+```bash
+	一个资产集合
+```
+
+#### 
