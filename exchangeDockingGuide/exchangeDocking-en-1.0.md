@@ -2,6 +2,8 @@
 
 The main purpose of this paper is to assist the exchange on-line CXC transactions.
 
+github:https://github.com/cxcblock
+
 ## Basic concept
 
 The UTXO model is utilized to CXC account system, so the on-line CXC is similar to BTC.
@@ -213,10 +215,11 @@ There are  two methods to generate recharge address:
   ./cxcsi CXCChain addnewaddr
   ```
   
+
 . /cxcsi CXCChain will be hidden later.
-  
+
 The created address will be imported directly into the wallet file.
-  
+
 - Method II：Create wallet address in batches in advance. 
 
   Call the following command：
@@ -225,19 +228,20 @@ The created address will be imported directly into the wallet file.
   setupkeypairs (count)
   ```
   
+
 where,the parameter count is the number of public/private key pairs, and the default is 1. Note that the address created in this way needs to be imported into the wallet through the importaddr or importprivkey command to directly call the transfer command. For example：
-  
+
 - setupkeypairs 100 
   - importaddr '["ADDR1","ADDR2","ADDR3"]' false
   
 ## Check the validity of the address
-  
+
  Check the validity of the account address by calling the following command:
-  
+
 ```bash
   validaddr (address)
-  ```
-  
+```
+
     The returned results are as follows:
 
   ```json
@@ -486,6 +490,8 @@ showunspent ( minconf maxconf addresses )
 	setuprawdeal [{"txid":"id","vout":n},...] {"address":amount,...} ( [data] "action" )
 ```
 
+Note: If you are transferring funds for the issuance of assets, please include a UTXO with a native asset (CXC) as a handling fee.
+
 > configs
 
 | Configs   | Description                                                  |
@@ -516,7 +522,7 @@ The number of bytes is calculated as follows:
 
 If vin contains issued assets
 
-+10+( Number of types of assets issued )* 24
++10+( The number of vins containing the issued assets + the number of vouts containing the issued assets )* 24
 
 If you include metadata (data)
 
@@ -795,4 +801,44 @@ integinterval   Delay between two automatic collections, in seconds
 ### Node encryption and decryption
 
 For details on node encryption and decryption, please refer to https://github.com/cxcblock/doc/tree/master/developer
+
+### View basic information about the issued assets
+
+Use the following command to view basic information about assets issued on the chain.
+
+#### showassets
+
+> Method description
+
+Return assets list
+
+> Call command
+
+```bash
+	showassets ( asset-id(s) detail count start )
+```
+
+> Method parameter
+
+| Parameter   | Description                                               |
+| ----------- | --------------------------------------------------------- |
+| asset-id(s) | Asset-id include: create txid, reference, name.           |
+| detail      | Default=false,return asset list include sell info if true |
+| count       | Default=INT_MAX - all                                     |
+| start       | Default=-count - last                                     |
+
+> e.g.
+
+```bash
+	showassets
+	showassets "AAA"
+```
+
+> Result
+
+```bash
+	Assets list
+```
+
+####  
 
