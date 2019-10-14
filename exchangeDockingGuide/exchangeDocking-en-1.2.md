@@ -1,6 +1,6 @@
 # Exchange docking guidelines
 
-The main purpose of this paper is to assist the exchange on-line CXC transactions.
+The purpose of this article is mainly to assist the exchange on the line CXC and the tokens issued based on CXCChain.
 
 github:https://github.com/cxcblock
 
@@ -439,7 +439,7 @@ To monitor user recharge, first check the block synchronization status and analy
 ## Handling withdrawal requests
 
 1. Record user withdrawal request, and change balance；
-2. Call the send or sendfrom command to send the transaction to the user's withdrawal address. For details, please refer to the Developer Documentation.
+2. Call the send or sendfrom command to send the transaction to the user (CXC and the assets on the chain). For details, please refer to [developer documentation] (https://github.com/cxcblock/doc/tree/master/developer)";
 3. After the command is successfully executed, txid will be returned and recorded in the database;
 4. After the block is confirmed, the withdrawal is successful.
 
@@ -488,6 +488,8 @@ showunspent ( minconf maxconf addresses )
 
 ```bash
 	setuprawdeal [{"txid":"id","vout":n},...] {"address":amount,...} ( [data] "action" )
+	--or
+	setuprawdeal [{"txid":"id","vout":n},...] {"address":{"资产名称":0.01}} ( [data] "action" )
 ```
 
 Note: If you are transferring funds for the issuance of assets, please include a UTXO with a native asset (CXC) as a handling fee.
@@ -841,4 +843,5 @@ Return assets list
 ```
 
 ####  
+
 
