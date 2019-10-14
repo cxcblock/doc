@@ -1,6 +1,6 @@
 # 交易所对接指南
 
-本文的目的主要是协助交易所上线CXC交易。
+本文的目的主要是协助交易所上线CXC以及基于CXCChain所发行的代币。
 
 github:https://github.com/cxcblock
 
@@ -302,48 +302,48 @@ settxfee 0.0001
   showblock hash|height 4
 ```
 
-  我们采用了UTXO模型，交易所需要解析每个TX中的VOUT部分，其中value为本地资产即CXC,assets为发行资产（在进行发行资产转账时需要消耗CXC作为手续费）。有两种方式比对充值信息：
+  账户体系采用了UTXO模型，交易所需要解析每个TX中的VOUT部分，其中value为本地资产即CXC,assets为发行资产（注意，在进行发行资产转账时需要消耗CXC作为手续费）。有两种方式比对充值信息：
 
 1. 交易所记录下所有和自己相关的交易，作为用户充值提现的记录。如果发现在VOUT中有属于交易所的地址，则修改数据库中该充值地址的用户余额（当然也可能包含发行资产）.
 2. 如果在VOUT中有属于交易所的地址，先在数据库中记录下充值记录，等待几个区块确认后再修改用户余额，注意此处需要检查vin和vout中的重复地址，判断vout中是转账行为、归集行为还是找零行为。
 
 ```bash
-  showblock 10006 4
+  showblock 0007151d74d2330167dc6714092f63e864b7861467b06fa89659487ae88bc0b3 4
 ```
 
   返回结果：
 
 ```json
  {
-    "hash" : "00bd9796841946cfd8b38d35ec4affc41349886427b255d332b5b51987c25084",
-    "miner" : "1G5Ep4YBAnDecF6MmfZt86dppWWV1ijrtH",
-    "confirmations" : 16525,
-    "size" : 825,
-    "height" : 10006,
+    "hash" : "0007151d74d2330167dc6714092f63e864b7861467b06fa89659487ae88bc0b3",
+    "miner" : "14T6N3jb5bdND3Hzb7M3qQJHYs9fDP9hC2",
+    "confirmations" : 2,
+    "size" : 621,
+    "height" : 218364,
     "version" : 3,
-    "merkleroot" : "a0d1979c1b35f1497fc05a9b9ea254fe72886fc86de63aab963944d93dfb44d7",
+    "merkleroot" : "6536cdac7472a9f08594557f5e720d1a94ff2f903821ec8afd3a3440deae5f9f",
     "tx" : [
         {
-            "txid" : "296f87e2417cc9da7695e4790b659c302ccfea2a8f4e5fc081ee82c8524f2d72",
+            "txid" : "4c6752c4088cd1dc0ad59737d0dbdae4108e29e64e8711f199b5edffbed40d6c",
             "version" : 1,
             "locktime" : 0,
             "vin" : [
                 {
-                    "coinbase" : "0216270101062f503253482f",
+                    "coinbase" : "03fc54030101062f503253482f",
                     "sequence" : 4294967295
                 }
             ],
             "vout" : [
                 {
-                    "value" : "125.0051",
+                    "value" : "125.0001",
                     "n" : 0,
                     "scriptPubKey" : {
-                        "asm" : "OP_DUP OP_HASH160 a557146c42de964657d073a291b0474bed00ceca OP_EQUALVERIFY OP_CHECKSIG",
-                        "hex" : "76a914a557146c42de964657d073a291b0474bed00ceca88ac",
+                        "asm" : "OP_DUP OP_HASH160 25d7ab47ea9f31e88235cba5ca24457b54543933 OP_EQUALVERIFY OP_CHECKSIG",
+                        "hex" : "76a91425d7ab47ea9f31e88235cba5ca24457b5454393388ac",
                         "reqSigs" : 1,
                         "type" : "pubkeyhash",
                         "addresses" : [
-                            "1G5Ep4YBAnDecF6MmfZt86dppWWV1ijrtH"
+                            "14T6N3jb5bdND3Hzb7M3qQJHYs9fDP9hC2"
                         ]
                     }
                 },
@@ -351,129 +351,103 @@ settxfee 0.0001
                     "value" : "0.00",
                     "n" : 1,
                     "scriptPubKey" : {
-                        "asm" : "OP_RETURN 53504b62473045022100ccfa18e4b1b635292144ed854884bb86d6ab167d748c94a8d7874cb0da2a57ed022005c7be4fd42bd4fa974b88ecbe5340aa7d2ea5c13b30812ff15b1a49aefd0aa4022102441ef754530a417d3f7731037081679c5368e370193394bf759922f06b90f7ed",
-                        "hex" : "6a4c6f53504b62473045022100ccfa18e4b1b635292144ed854884bb86d6ab167d748c94a8d7874cb0da2a57ed022005c7be4fd42bd4fa974b88ecbe5340aa7d2ea5c13b30812ff15b1a49aefd0aa4022102441ef754530a417d3f7731037081679c5368e370193394bf759922f06b90f7ed",
+                        "asm" : "OP_RETURN 53504b62473045022100b1c7371d57544ec1d700c21c6a11170ed25fd1689bf69096bde6de81502e3aa002207a4bc58eb23fd9ade2767481a7d1eeec925241b4fd81373ae11b44c4886411ba022102fbbaafc765ad3ec05d6b5bd9274cc64c393f0c11d5e4572141eb8c0aec2761ae",
+                        "hex" : "6a4c6f53504b62473045022100b1c7371d57544ec1d700c21c6a11170ed25fd1689bf69096bde6de81502e3aa002207a4bc58eb23fd9ade2767481a7d1eeec925241b4fd81373ae11b44c4886411ba022102fbbaafc765ad3ec05d6b5bd9274cc64c393f0c11d5e4572141eb8c0aec2761ae",
                         "type" : "nulldata"
                     },
                     "data" : [
-                        "53504b62473045022100ccfa18e4b1b635292144ed854884bb86d6ab167d748c94a8d7874cb0da2a57ed022005c7be4fd42bd4fa974b88ecbe5340aa7d2ea5c13b30812ff15b1a49aefd0aa4022102441ef754530a417d3f7731037081679c5368e370193394bf759922f06b90f7ed"
+                        "53504b62473045022100b1c7371d57544ec1d700c21c6a11170ed25fd1689bf69096bde6de81502e3aa002207a4bc58eb23fd9ade2767481a7d1eeec925241b4fd81373ae11b44c4886411ba022102fbbaafc765ad3ec05d6b5bd9274cc64c393f0c11d5e4572141eb8c0aec2761ae"
                     ]
                 }
             ],
-            "hex" : "01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff0c0216270101062f503253482fffffffff022c6d7307000000001976a914a557146c42de964657d073a291b0474bed00ceca88ac0000000000000000726a4c6f53504b62473045022100ccfa18e4b1b635292144ed854884bb86d6ab167d748c94a8d7874cb0da2a57ed022005c7be4fd42bd4fa974b88ecbe5340aa7d2ea5c13b30812ff15b1a49aefd0aa4022102441ef754530a417d3f7731037081679c5368e370193394bf759922f06b90f7ed00000000"
+            "hex" : "01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff0d03fc54030101062f503253482fffffffff02a4597307000000001976a91425d7ab47ea9f31e88235cba5ca24457b5454393388ac0000000000000000726a4c6f53504b62473045022100b1c7371d57544ec1d700c21c6a11170ed25fd1689bf69096bde6de81502e3aa002207a4bc58eb23fd9ade2767481a7d1eeec925241b4fd81373ae11b44c4886411ba022102fbbaafc765ad3ec05d6b5bd9274cc64c393f0c11d5e4572141eb8c0aec2761ae00000000"
         },
         {
-            "txid" : "d8567d6f701f8a4993b99bf9c6fae872db7f599ae56f5768475ffd028e01eda0",
+            "txid" : "f854d30f9679fb2f810ba3344d2e2614059e27f65be1220f02c82f76e4d61eef",
             "version" : 1,
             "locktime" : 0,
             "vin" : [
                 {
-                    "txid" : "e18eba4c79dd037d6b9c12cdde5513499ec7a2320107c0042972da19666e2afd",
+                    "txid" : "e8d14543ea296aa3432e6fa5a39dcfc6324d8fb791e2d155f49770f1d5ed688c",
                     "vout" : 0,
                     "scriptSig" : {
-                        "asm" : "304402203683b86ce5146518752816b21c07f64cf3ecb54543c066c26058ad53ed4727a202201974ff1ab8e5327da8152c244ac7a5712fc4b89759a1fe3e997ab4824e44d8b601 02905735c7538bacc0512ee3d11d18345f042721d2afc7a573f2f8a8b4e8c6c4e4",
-                        "hex" : "47304402203683b86ce5146518752816b21c07f64cf3ecb54543c066c26058ad53ed4727a202201974ff1ab8e5327da8152c244ac7a5712fc4b89759a1fe3e997ab4824e44d8b6012102905735c7538bacc0512ee3d11d18345f042721d2afc7a573f2f8a8b4e8c6c4e4"
+                        "asm" : "30440220498672ef16691868fc36e0a56aeecc379b30ea9eeca086a3dbf627564490d45b02200a913b1747da3da56ca384a964a47e7e4ccdc7bc30e85892be9f38281e5e7d0e01 03016a820dbc2e1d0f3bf1c8a9b28a977b899fa57a74d005d83a5b25410988fb17",
+                        "hex" : "4730440220498672ef16691868fc36e0a56aeecc379b30ea9eeca086a3dbf627564490d45b02200a913b1747da3da56ca384a964a47e7e4ccdc7bc30e85892be9f38281e5e7d0e012103016a820dbc2e1d0f3bf1c8a9b28a977b899fa57a74d005d83a5b25410988fb17"
                     },
                     "sequence" : 4294967295
                 }
             ],
             "vout" : [
                 {
-                    "value" : "9.995",
+                    "value" : "0.10",
                     "n" : 0,
                     "scriptPubKey" : {
-                        "asm" : "OP_DUP OP_HASH160 1a3e2de85ac5c809a2ca1b451d722577029620a3 OP_EQUALVERIFY OP_CHECKSIG",
-                        "hex" : "76a9141a3e2de85ac5c809a2ca1b451d722577029620a388ac",
+                        "asm" : "OP_DUP OP_HASH160 a781c82edc6048a44e7e35ac0029d9447851fb39 OP_EQUALVERIFY OP_CHECKSIG 73706b71602cebc09e7d8999b42b95434272eca60a00000000000000 OP_DROP",
+                        "hex" : "76a914a781c82edc6048a44e7e35ac0029d9447851fb3988ac1c73706b71602cebc09e7d8999b42b95434272eca60a0000000000000075",
                         "reqSigs" : 1,
                         "type" : "pubkeyhash",
                         "addresses" : [
-                            "13Pm4HQqux8Z9U2CP3wQCF85gmoA9FThZg"
+                            "1GGhKSnxh1DgNB6gSB4RuJZaJ2vAjV1xrS"
                         ]
-                    }
-                },
-                {
-                    "value" : "0.00",
-                    "n" : 1,
-                    "scriptPubKey" : {
-                        "asm" : "73706b6601 OP_DROP OP_RETURN 4365646234336437663563616635613334303530302c3146774a725a32703966655670314c7076683331577a5a526f45734c526f73417350",
-                        "hex" : "0573706b6601756a384365646234336437663563616635613334303530302c3146774a725a32703966655670314c7076683331577a5a526f45734c526f73417350",
-                        "type" : "nulldata"
                     },
-                    "data" : [
+                    "assets" : [
                         {
-                            "text" : "Cedb43d7f5caf5a340500,1FwJrZ2p9feVp1Lpvh31WzZRoEsLRosAsP"
+                            "name" : "CoinA",
+                            "selltxid" : "a6ec724243952bb499897d9ec0eb2c600ef977a7074ac6d862cfffebf1d9a400",
+                            "assetref" : "225-301-60582",
+                            "qty" : 0.1,
+                            "raw" : 10,
+                            "type" : "transfer"
                         }
                     ]
                 },
                 {
-                    "value" : "1.00",
-                    "n" : 2,
-                    "scriptPubKey" : {
-                        "asm" : "OP_DUP OP_HASH160 a3d7208117a15691b5b4af55742fc8ff739d97a9 OP_EQUALVERIFY OP_CHECKSIG",
-                        "hex" : "76a914a3d7208117a15691b5b4af55742fc8ff739d97a988ac",
-                        "reqSigs" : 1,
-                        "type" : "pubkeyhash",
-                        "addresses" : [
-                            "1FwJrZ2p9feVp1Lpvh31WzZRoEsLRosAsP"
-                        ]
-                    }
-                }
-            ],
-            "hex" : "0100000001fd2a6e6619da722904c0070132a2c79e491355decd129c6b7d03dd794cba8ee1000000006a47304402203683b86ce5146518752816b21c07f64cf3ecb54543c066c26058ad53ed4727a202201974ff1ab8e5327da8152c244ac7a5712fc4b89759a1fe3e997ab4824e44d8b6012102905735c7538bacc0512ee3d11d18345f042721d2afc7a573f2f8a8b4e8c6c4e4ffffffff03f8829800000000001976a9141a3e2de85ac5c809a2ca1b451d722577029620a388ac0000000000000000410573706b6601756a384365646234336437663563616635613334303530302c3146774a725a32703966655670314c7076683331577a5a526f45734c526f7341735040420f00000000001976a914a3d7208117a15691b5b4af55742fc8ff739d97a988ac00000000"
-        },
-        {
-            "txid" : "91b1fa629cacbf96dad2538db9fa513eb219ae4ff8ace7684abdceb1a9c0458d",
-            "version" : 1,
-            "locktime" : 0,
-            "vin" : [
-                {
-                    "txid" : "013eae63651f8225f769be485979e143c2010cb39426ed91cc861dc70428aba4",
-                    "vout" : 0,
-                    "scriptSig" : {
-                        "asm" : "30440220265d40be2197bca27d760d1b649d41c909464e9a389e6d2c09e1d06b418ff45f0220086819326c592043ff08506d9079a930b655ae3cef7948b68030daadf816e28301 02ac4cbf91dd741fb3258b817975e8e2cca014559676a44223018f493ad200ed99",
-                        "hex" : "4730440220265d40be2197bca27d760d1b649d41c909464e9a389e6d2c09e1d06b418ff45f0220086819326c592043ff08506d9079a930b655ae3cef7948b68030daadf816e283012102ac4cbf91dd741fb3258b817975e8e2cca014559676a44223018f493ad200ed99"
-                    },
-                    "sequence" : 4294967295
-                }
-            ],
-            "vout" : [
-                {
-                    "value" : "4.00",
-                    "n" : 0,
-                    "scriptPubKey" : {
-                        "asm" : "OP_DUP OP_HASH160 f368ac0cf5174b399ab88c37ec44a895751cf25f OP_EQUALVERIFY OP_CHECKSIG",
-                        "hex" : "76a914f368ac0cf5174b399ab88c37ec44a895751cf25f88ac",
-                        "reqSigs" : 1,
-                        "type" : "pubkeyhash",
-                        "addresses" : [
-                            "1PC2bMkzLyvdpqeq8mMDSK2TsymEWDMW3D"
-                        ]
-                    }
-                },
-                {
-                    "value" : "5.9949",
+                    "value" : "0.00",
                     "n" : 1,
                     "scriptPubKey" : {
-                        "asm" : "OP_DUP OP_HASH160 1a3e2de85ac5c809a2ca1b451d722577029620a3 OP_EQUALVERIFY OP_CHECKSIG",
-                        "hex" : "76a9141a3e2de85ac5c809a2ca1b451d722577029620a388ac",
+                        "asm" : "OP_DUP OP_HASH160 0d688d7bc67854dd1278e14a1ec52c47242c00da OP_EQUALVERIFY OP_CHECKSIG 73706b71602cebc09e7d8999b42b95434272eca6ea01000000000000 OP_DROP",
+                        "hex" : "76a9140d688d7bc67854dd1278e14a1ec52c47242c00da88ac1c73706b71602cebc09e7d8999b42b95434272eca6ea0100000000000075",
                         "reqSigs" : 1,
                         "type" : "pubkeyhash",
                         "addresses" : [
-                            "13Pm4HQqux8Z9U2CP3wQCF85gmoA9FThZg"
+                            "12Du2wZN7R9HqLxssq2xFhjPcjSj5vehCb"
+                        ]
+                    },
+                    "assets" : [
+                        {
+                            "name" : "CoinA",
+                            "selltxid" : "a6ec724243952bb499897d9ec0eb2c600ef977a7074ac6d862cfffebf1d9a400",
+                            "assetref" : "225-301-60582",
+                            "qty" : 4.9,
+                            "raw" : 490,
+                            "type" : "transfer"
+                        }
+                    ]
+                },
+                {
+                    "value" : "0.8999",
+                    "n" : 2,
+                    "scriptPubKey" : {
+                        "asm" : "OP_DUP OP_HASH160 0d688d7bc67854dd1278e14a1ec52c47242c00da OP_EQUALVERIFY OP_CHECKSIG",
+                        "hex" : "76a9140d688d7bc67854dd1278e14a1ec52c47242c00da88ac",
+                        "reqSigs" : 1,
+                        "type" : "pubkeyhash",
+                        "addresses" : [
+                            "12Du2wZN7R9HqLxssq2xFhjPcjSj5vehCb"
                         ]
                     }
                 }
             ],
-            "hex" : "0100000001a4ab2804c71d86cc91ed2694b30c01c243e1795948be69f725821f6563ae3e01000000006a4730440220265d40be2197bca27d760d1b649d41c909464e9a389e6d2c09e1d06b418ff45f0220086819326c592043ff08506d9079a930b655ae3cef7948b68030daadf816e283012102ac4cbf91dd741fb3258b817975e8e2cca014559676a44223018f493ad200ed99ffffffff0200093d00000000001976a914f368ac0cf5174b399ab88c37ec44a895751cf25f88ac94795b00000000001976a9141a3e2de85ac5c809a2ca1b451d722577029620a388ac00000000"
+            "hex" : "01000000018c68edd5f17097f455d1e291b78f4d32c6cf9da3a56f2e43a36a29ea4345d1e8000000006a4730440220498672ef16691868fc36e0a56aeecc379b30ea9eeca086a3dbf627564490d45b02200a913b1747da3da56ca384a964a47e7e4ccdc7bc30e85892be9f38281e5e7d0e012103016a820dbc2e1d0f3bf1c8a9b28a977b899fa57a74d005d83a5b25410988fb17ffffffff03a0860100000000003776a914a781c82edc6048a44e7e35ac0029d9447851fb3988ac1c73706b71602cebc09e7d8999b42b95434272eca60a000000000000007500000000000000003776a9140d688d7bc67854dd1278e14a1ec52c47242c00da88ac1c73706b71602cebc09e7d8999b42b95434272eca6ea01000000000000753cbb0d00000000001976a9140d688d7bc67854dd1278e14a1ec52c47242c00da88ac00000000"
         }
     ],
-    "time" : 1562218608,
-    "nonce" : 359,
+    "time" : 1570967695,
+    "nonce" : 714,
     "bits" : "2000ffff",
     "difficulty" : 5.96046447753906e-8,
-    "chainwork" : "0000000000000000000000000000000000000000000000000000000000271700",
-    "prevblockhash" : "00020c2bffe8027ca9e6a32c53a65725f74ee64e0593292146a47b703be15b9a",
-    "nextblockhash" : "00902185d67d4df146a85eeedf4fcbcc805c791595ac872d80583e518a2d920e"
+    "chainwork" : "000000000000000000000000000000000000000000000000000000000354fd00",
+    "prevblockhash" : "00ba503c3f671a5c9593b0c37d1bb1b15987e87f171a8d6b315dbb20f7ac26b5",
+    "nextblockhash" : "0033a95d00c16c344549201c7cc25d7a8594b18a745fb56dedcb5823fd3b2c09"
 }
 ```
 
@@ -481,7 +455,7 @@ settxfee 0.0001
 
 
 1. 记录用户提现请求，更改余额；
-2. 调用send或者sendfrom命令，向用户提现地址发送交易，具体使用方法请参考《[开发者文档](https://github.com/cxcblock/doc/tree/master/developer)》；
+2. 调用send或者sendfrom命令，向用户提现地址发送交易(CXC以及链上发行资产均可)，具体使用方法请参考《[开发者文档](https://github.com/cxcblock/doc/tree/master/developer)》；
 3. 调用命令成功后将返回txid，记录在数据库中；
 4. 等待区块确认后，即为提现成功。
 
@@ -534,6 +508,8 @@ showunspent ( minconf maxconf addresses )
 
 ```bash
 	setuprawdeal [{"txid":"id","vout":n},...] {"address":amount,...} ( [data] "action" )
+	--如果是链上发行的资产
+	setuprawdeal [{"txid":"id","vout":n},...] {"address":{"资产名称":0.01}} ( [data] "action" )
 ```
 
 注：如果是进行发行资产的转账，请包含一个含有原生资产（CXC）的UTXO作为手续费。
@@ -713,11 +689,6 @@ sendrawdeal dealhex2
 	showdeal txid
 ```
 
-> 方法参数
-> |参数	|描述	|
-> |--	|--	|
-> |txid  |txid	|
-
 > e.g.
 
 ```bash
@@ -787,12 +758,6 @@ sendrawdeal dealhex2
 ```bash
 	showrawdeal "txid" 
 ```
-
-> 方法参数
-
-|参数			|描述								|
-|--				|--									|
-|txid			|txid								|
 
 > e.g.
 
@@ -875,3 +840,4 @@ integinterval    两次自动归集之间的延迟时间，单位为秒
 ```
 
 #### 
+
